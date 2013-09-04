@@ -1,6 +1,6 @@
 # Bash it
 
-**Bash it** is a mash up of my own bash commands and scripts, other bash stuff I have found.
+**Bash it** is a mash up of [my](http://github.com/revans) own bash commands and scripts, other bash stuff I have found.
 
 (And a shameless ripoff of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). :)
 
@@ -8,7 +8,7 @@ Includes autocompletion, themes, aliases, custom functions, a few stolen pieces 
 
 ## Install
 
-1. Check a clone of this repo: `git clone http://github.com/revans/bash-it.git ~/.bash_it`
+1. Check a clone of this repo: `git clone http://github.com/nwinkler/bash-it.git ~/.bash_it`
 2. Run `~/.bash_it/install.sh` (it automatically backs up your `~/.bash_profile`)
 3. Edit your `~/.bash_profile` file in order to customize bash-it.
 
