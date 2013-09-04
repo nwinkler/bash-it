@@ -32,3 +32,5 @@ alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
 
 # Flush your dns cache
 alias flush='dscacheutil -flushcache'
+
+alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "Terminal" -message "Done"'

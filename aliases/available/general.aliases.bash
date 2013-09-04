@@ -8,6 +8,7 @@ alias la='ls -AF'       # Compact view, show hidden
 alias ll='ls -al'
 alias l='ls -a'
 alias l1='ls -1'
+alias lll='ls -als'
 
 alias _="sudo"
 
@@ -55,3 +56,7 @@ fi
 # Directory
 alias	md='mkdir -p'
 alias	rd='rmdir'
+
+# Alias helper
+alias  ag='alias | grep'
+
