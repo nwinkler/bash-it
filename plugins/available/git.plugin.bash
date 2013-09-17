@@ -126,3 +126,13 @@ function github_clone_ssh {
 
     git clone ssh://git@ssh.github.com:443/$1.git $2
 }
+
+function github_add_upstream {
+    about 'Adds an upstream repository (HTTPS)'
+    group 'git'
+    param '1: repo user and name'
+    example '$ github_add_upstream revans/bash-it'
+
+    git remote add upstream https://github.com/$1.git
+}
+
