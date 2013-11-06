@@ -23,8 +23,8 @@ prompt_setter() {
 
 PROMPT_COMMAND=prompt_setter
 
-SCM_THEME_PROMPT_DIRTY=" ✗"
-SCM_THEME_PROMPT_CLEAN=" ✓"
+SCM_THEME_PROMPT_DIRTY=" ${bold_red}✗${normal}"
+SCM_THEME_PROMPT_CLEAN=" ${bold_green}✓${normal}"
 SCM_THEME_PROMPT_PREFIX=" ("
 SCM_THEME_PROMPT_SUFFIX=")"
 RVM_THEME_PROMPT_PREFIX=" ("
