@@ -42,7 +42,11 @@ Anything in the custom directory will be ignored, with the exception of `custom/
 
 There are a few bash it themes.  If you've created your own custom prompts, I'd love it if you shared with everyone else!  Just submit a Pull Request to me (revans).
 
-Want to see what all the custom themes look like? Export BASH_PREVIEW, and source ~/.bash_profile. All of the available themes will be displayed.
+Want to see what all the custom themes look like? Run the following to see all of the available themes:
+
+```
+$ BASH_PREVIEW=true reload
+```
 
 ## Help out
 
