@@ -24,6 +24,13 @@ function git_remove_missing_files() {
   git ls-files -d -z | xargs -0 git update-index --remove
 }
 
+function git_ignore() {
+  about 'adds file or path to git ignore file'
+  param '1: file or path fragment to ignore'
+  group 'git'
+  echo "$1" >> .gitignore
+}
+
 # Adds files to git's exclude file (same as .gitignore)
 function local-ignore() {
   about 'adds file or path to git exclude file'
