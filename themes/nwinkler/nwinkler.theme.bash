@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Two line prompt showing the following information:
+# (time) SCM [username@hostname] pwd (SCM branch SCM status) 
+# → 
+#
+# Example:
+# (14:00:26) ± [foo@bar] ~/.bash_it (master ✓) 
+# → 
+#
+# The arrow on the second line is showing the exit status of the last command:
+# * Green: 0 exit status
+# * Red: non-zero exit status
+#
+# The exit code functionality currently doesn't work if you are using the 'fasd' plugin,
+# since 'fasd' is messing with the $PROMPT_COMMAND
+
+
 PROMPT_END_CLEAN="${green}→${reset_color}"
 PROMPT_END_DIRTY="${red}→${reset_color}"
 
