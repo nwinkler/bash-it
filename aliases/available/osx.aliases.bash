@@ -34,3 +34,6 @@ alias whotunes='lsof -r 2 -n -P -F n -c iTunes -a -i TCP@`hostname`:3689'
 alias flush='dscacheutil -flushcache'
 
 alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "Terminal" -message "Done"'
+
+# From http://apple.stackexchange.com/questions/110343/copy-last-command-in-terminal
+alias copyLastCmd='fc -ln -1 | sed '1s/^[[:space:]]*//' | awk 1 ORS="" | pbcopy '
