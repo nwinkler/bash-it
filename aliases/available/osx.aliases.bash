@@ -30,4 +30,4 @@ alias flush='dscacheutil -flushcache'
 alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "Terminal" -message "Done"'
 
 # From http://apple.stackexchange.com/questions/110343/copy-last-command-in-terminal
-alias copyLastCmd='fc -ln -1 | sed '1s/^[[:space:]]*//' | awk 1 ORS="" | pbcopy '
+alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
