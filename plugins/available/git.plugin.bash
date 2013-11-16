@@ -2,11 +2,11 @@ cite about-plugin
 about-plugin 'git helper functions'
 
 function git_remote {
-  about 'adds remote $GIT_HOSTING:$1 to current repo'
+  about 'adds remote $GIT_HOSTING/$1 to current repo'
   group 'git'
 
-  echo "Running: git remote add origin ${GIT_HOSTING}:$1.git"
-  git remote add origin $GIT_HOSTING:$1.git
+  echo "Running: git remote add origin ${GIT_HOSTING}/$1.git"
+  git remote add origin $GIT_HOSTING/$1.git
 }
 
 function git_first_push {
