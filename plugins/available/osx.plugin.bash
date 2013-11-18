@@ -75,8 +75,9 @@ function spotlight() {
 }
 
 function set_java_home() {
-  about 'Sets the Java Home variable to the specified version'
+  about 'Sets the Java Home variable to the specified version. The version needs to be specified in the form 1.*, e.g. 1.6. The second (optional) parameter "-silent" can be specified when calling the command from a script to avoid the output.'
   param '1: version'
+  param '2: -silent'
   example 'set_java_home 1.6'
   group 'osx'
   
@@ -98,9 +99,11 @@ function set_java_home() {
     else
       export PATH=$(echo $PATH|sed -e "s:$JAVA_HOME/bin:$NEW_JAVA_HOME/bin:g")
     fi
-          
+      
     export JAVA_HOME=$NEW_JAVA_HOME
         
-    java -version
+    if [ $2 != "-silent" ] ; then    
+	  java -version
+	fi
   fi
 }
