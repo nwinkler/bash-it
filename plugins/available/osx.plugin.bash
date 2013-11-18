@@ -102,7 +102,7 @@ function set_java_home() {
       
     export JAVA_HOME=$NEW_JAVA_HOME
         
-    if [ $2 != "-silent" ] ; then    
+    if [ -z "$2" ] || [ $2 != "-silent" ] ; then    
 	  java -version
 	fi
   fi
