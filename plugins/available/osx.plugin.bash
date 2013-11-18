@@ -73,3 +73,32 @@ function spotlight() {
     sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
   fi  
 }
+
+function java_home() {
+  about 'Sets the Java Home variable to the specified version'
+  param '1: version'
+  example 'java_home 1.6'
+  group 'osx'
+  
+  if [ -z "$1" ] ; then
+    echo "Usage: java_home <version>"
+    echo "To use 1.6, run: java_home 1.6"
+    echo "To use 1.7, run: java_home 1.7"
+    echo ""
+    
+    /usr/libexec/java_home -a x86_64 -V >/dev/null
+  else
+    local NEW_JAVA_HOME=$(/usr/libexec/java_home -v $1)
+  
+    if [ -z "$JAVA_HOME" ]
+    then
+      export PATH=$NEW_JAVA_HOME/bin:$PATH
+    else
+      export PATH=$(echo $PATH|sed -e "s:$JAVA_HOME/bin:$NEW_JAVA_HOME/bin:g")
+    fi
+          
+    export JAVA_HOME=$NEW_JAVA_HOME
+        
+    java -version
+  fi
+}
