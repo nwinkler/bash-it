@@ -74,16 +74,18 @@ function spotlight() {
   fi  
 }
 
-function java_home() {
+function set_java_home() {
   about 'Sets the Java Home variable to the specified version'
   param '1: version'
-  example 'java_home 1.6'
+  example 'set_java_home 1.6'
   group 'osx'
   
   if [ -z "$1" ] ; then
-    echo "Usage: java_home <version>"
+    echo "Usage: set_java_home <version>"
     echo "To use 1.6, run: java_home 1.6"
     echo "To use 1.7, run: java_home 1.7"
+    echo ""
+    echo "Currently used: $JAVA_HOME"
     echo ""
     
     /usr/libexec/java_home -a x86_64 -V >/dev/null
