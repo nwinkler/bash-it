@@ -81,15 +81,17 @@ function set_java_home() {
   example 'set_java_home 1.6'
   group 'osx'
   
-  if [ -z "$1" ] ; then
-    echo "Usage: set_java_home <version>"
-    echo "To use 1.6, run: java_home 1.6"
-    echo "To use 1.7, run: java_home 1.7"
+  if [ -z "$1" ] ; then    
+    local prefix="Usage: set_java_home "
+    for i in $(/usr/libexec/java_home -a x86_64 -V 2>&1 | grep -E "\d\.\d\.\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home | colrm 4)
+    do
+      echo -n "$prefix$i"
+      prefix=" | "
+    done
+    echo ""
     echo ""
     echo "Currently used: $JAVA_HOME"
-    echo ""
-    
-    /usr/libexec/java_home -a x86_64 -V >/dev/null
+    echo ""    
   else
     local NEW_JAVA_HOME=$(/usr/libexec/java_home -v $1)
   
