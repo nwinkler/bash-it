@@ -83,15 +83,17 @@ function set_java_home() {
   
   if [ -z "$1" ] ; then    
     local prefix="Usage: set_java_home "
-    for i in $(/usr/libexec/java_home -a x86_64 -V 2>&1 | grep -E "\d\.\d\.\d" | cut -d , -f 1 | colrm 1 4 | grep -v Home | colrm 4)
+    # Extract only the first two parts of the version number, e.g. '1.7', discard the rest of the lines
+    # Then sort in ascending manner.
+    for i in $(/usr/libexec/java_home -a x86_64 -V 2>&1 | sed -n 's/^[[:space:]]*\([[:digit:]]\.[[:digit:]]\).*/\1/p' | sort)
     do
+      # Concatenate the prefix (either the beginning of the usage line, or a separator) and the current version number
       echo -n "$prefix$i"
       prefix=" | "
     done
     echo ""
     echo ""
     echo "Currently used: $JAVA_HOME"
-    echo ""    
   else
     local NEW_JAVA_HOME=$(/usr/libexec/java_home -v $1)
   
