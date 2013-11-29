@@ -31,3 +31,6 @@ alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notif
 
 # From http://apple.stackexchange.com/questions/110343/copy-last-command-in-terminal
 alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
+
+# Kill the virus scanner process
+alias k9sym='pkill -9 '\''SmallScanner'\'''
