@@ -33,6 +33,6 @@ alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notif
 alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
 
 # Kill the virus scanner process
-alias k9sym='pkill -9 '\''SmallScanner'\'''
+alias k9sym='sudo pkill -9 '\''SmallScanner'\''; sudo pkill -9 '\''SymAutoProtect'\'''
 alias stopIronMountain='sudo launchctl unload /Library/LaunchDaemons/AgentService.plist'
 alias startIronMountain='sudo launchctl load /Library/LaunchDaemons/AgentService.plist'
