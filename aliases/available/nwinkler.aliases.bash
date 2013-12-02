@@ -13,5 +13,6 @@ alias whence='type -a'                        # where, of a sort
 alias grep='grep --color'                     # show differences in colour
 
 alias k9='kill -9'
+alias pk9='pkill -9'
 
 alias pd='pushd'
