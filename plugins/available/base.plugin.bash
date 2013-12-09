@@ -200,3 +200,16 @@ for_all_dirs ()
 		cd ..
 	done
 }
+
+count_lines () {
+	about 'counts line number across files and directories'
+	param '1: directory'
+	param '2: wildcard'
+	group 'base'
+	example 'count_lines . '\''*.js'\'''
+	
+	local findDir="$1"
+	local wildcard="$2"
+	
+	( find $findDir -name "$wildcard" -print0 | xargs -0 cat ) | wc -l
+}
