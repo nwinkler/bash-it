@@ -3,7 +3,8 @@ about-alias 'osx-specific aliases'
 
 # Desktop Programs
 alias preview="open -a '$PREVIEW'"
-alias xcode="open -a '/Developer/Applications/Xcode.app'"
+alias xcode="open -a '/Applications/XCode.app'"
+alias filemerge="open -a '/Developer/Applications/Utilities/FileMerge.app'"
 alias safari="open -a safari"
 alias firefox="open -a firefox"
 alias chrome="open -a google\ chrome"
