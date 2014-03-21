@@ -48,7 +48,7 @@ Want to see what all the custom themes look like? Run the following to see all o
 $ BASH_PREVIEW=true reload
 ```
 
-You can see the theme screenshots  [here](https://github.com/revans/bash-it/tree/master/theme-screenshots)
+You can see the theme screenshots  [here](https://github.com/revans/bash-it/wiki/Themes)
 
 ## Help out
 
