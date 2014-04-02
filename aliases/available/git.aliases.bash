@@ -42,6 +42,19 @@ alias gga="git log --graph --all --pretty=format:'%Cred%h%Creset -%C(yellow)%d%C
 alias ggs="gg --stat"
 alias gsl="git shortlog -sn"
 alias gw="git whatchanged"
+alias gt="git tag"
+alias gta="git tag -a"
+alias gtd="git tag -d"
+alias gtl="git tag -l"
+
+case $OSTYPE in
+  darwin*)
+    alias gtls="git tag -l | gsort -V"
+    ;;
+  *)
+    alias gtls='git tag -l | sort -V'
+    ;;
+esac
 
 if [ -z "$EDITOR" ]; then
     case $OSTYPE in
