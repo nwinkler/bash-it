@@ -11,6 +11,8 @@ alias chrome="open -a google\ chrome"
 alias f='open -a Finder '
 alias fh='open -a Finder .'
 alias textedit='open -a TextEdit'
+alias hex='open -a "Hex Fiend"'
+alias skype='open -a Skype'
 
 if [ -s /usr/bin/firefox ] ; then
   unalias firefox
