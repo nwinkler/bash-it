@@ -40,3 +40,7 @@ alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
 alias k9sym='sudo pkill -9 '\''SmallScanner'\''; sudo pkill -9 '\''SymAutoProtect'\'''
 alias stopIronMountain='sudo launchctl unload /Library/LaunchDaemons/AgentService.plist'
 alias startIronMountain='sudo launchctl load /Library/LaunchDaemons/AgentService.plist'
+
+# Show/hide hidden files (for Mac OS X Mavericks)
+alias showhidden="defaults write com.apple.finder AppleShowAllFiles TRUE"
+alias hidehidden="defaults write com.apple.finder AppleShowAllFiles FALSE"
