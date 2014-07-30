@@ -217,7 +217,7 @@ function github_clone_ssh {
     param '2: local directory to clone into'
     example '$ github_clone_ssh nwinkler/bash-it ~/.bash_it'
 
-    git clone ssh://git@ssh.github.com:443/$1.git $2
+    git clone git@github.com:$1.git $2
 }
 
 function github_add_upstream {
@@ -228,4 +228,3 @@ function github_add_upstream {
 
     git remote add upstream https://github.com/$1.git
 }
-
