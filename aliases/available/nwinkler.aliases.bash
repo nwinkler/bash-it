@@ -1,5 +1,6 @@
 alias pse="ps -ef"
 alias psg="ps -ef|grep"
+alias eg="env | grep -i"
 
 alias ff="find . -name"
 
