@@ -33,9 +33,6 @@ alias flush='dscacheutil -flushcache'
 
 alias termnot='/Applications/terminal-notifier.app/Contents/MacOS/terminal-notifier -title "Terminal" -message "Done"'
 
-# From http://apple.stackexchange.com/questions/110343/copy-last-command-in-terminal
-alias copyLastCmd='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | pbcopy'
-
 # Kill the virus scanner process
 alias k9sym='sudo pkill -9 '\''SmallScanner'\''; sudo pkill -9 '\''SymAutoProtect'\'''
 alias stopIronMountain='sudo launchctl unload /Library/LaunchDaemons/AgentService.plist'
