@@ -81,7 +81,7 @@ function spotlight() {
   	sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
   elif [ $1 = "off" ] ; then
     sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
-  fi  
+  fi
 }
 
 function set_java_home() {
@@ -90,8 +90,8 @@ function set_java_home() {
   param '2: -silent'
   example 'set_java_home 1.6'
   group 'osx'
-  
-  if [ -z "$1" ] ; then    
+
+  if [ -z "$1" ] ; then
     local prefix="Usage: set_java_home "
     # Extract only the first two parts of the version number, e.g. '1.7', discard the rest of the lines
     # Then sort in ascending manner.
@@ -106,17 +106,17 @@ function set_java_home() {
     echo "Currently used: $JAVA_HOME"
   else
     local NEW_JAVA_HOME=$(/usr/libexec/java_home -v $1)
-  
+
     if [ -z "$JAVA_HOME" ]
     then
       export PATH=$NEW_JAVA_HOME/bin:$PATH
     else
       export PATH=$(echo $PATH|sed -e "s:$JAVA_HOME/bin:$NEW_JAVA_HOME/bin:g")
     fi
-      
+
     export JAVA_HOME=$NEW_JAVA_HOME
-        
-    if [ -z "$2" ] || [ $2 != "-silent" ] ; then    
+
+    if [ -z "$2" ] || [ $2 != "-silent" ] ; then
 	  java -version
 	fi
   fi
