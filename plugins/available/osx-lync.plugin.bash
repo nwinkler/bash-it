@@ -34,6 +34,13 @@ function lync-dnd() {
   _lync-status "Do Not Disturb"
 }
 
+function lync-reset() {
+  about 'Resets Lync status'
+  group 'osx-lync'
+
+  _lync-status "Reset Status"
+}
+
 function _lync-status() {
   osascript 2>/dev/null <<EOF
   -- Save your current application
