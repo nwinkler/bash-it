@@ -5,7 +5,7 @@ function ips ()
 {
     about 'display all ip addresses for this host'
     group 'base'
-    ifconfig | grep "inet " | awk '{ print $2 }'
+    ifconfig | awk '/inet /{ print $2 }'
 }
 
 function down4me ()
@@ -210,7 +210,7 @@ function buf ()
     group 'base'
     local filename=$1
     local filetime=$(date +%Y%m%d_%H%M%S)
-    cp ${filename} ${filename}_${filetime}
+    cp "${filename}" "${filename}_${filetime}"
 }
 
 for_all_dirs ()
