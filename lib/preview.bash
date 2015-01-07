@@ -1,5 +1,5 @@
 if [[ $BASH_PREVIEW ]];
-then 
+then
   unset BASH_PREVIEW #Prevent infinite looping
   echo "
 
