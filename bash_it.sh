@@ -3,10 +3,12 @@
 
 # Reload Library
 if [ -e $HOME/.bash_profile ]
+then
   alias reload='source ~/.bash_profile'
 fi
 
 if [ -e $HOME/.bashrc ]
+then
   alias reload='source ~/.bashrc'
 fi
 
