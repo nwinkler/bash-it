@@ -2,15 +2,14 @@
 # Initialize Bash It
 
 # Reload Library
-if [ -e $HOME/.bash_profile ]
-then
-  alias reload='source ~/.bash_profile'
-fi
-
-if [ -e $HOME/.bashrc ]
-then
-  alias reload='source ~/.bashrc'
-fi
+case $OSTYPE in
+  darwin*)
+    alias reload='source ~/.bash_profile'
+    ;;
+  *)
+    alias reload='source ~/.bashrc'
+    ;;
+esac
 
 # Only set $BASH_IT if it's not already set
 if [ -z "$BASH_IT" ];
