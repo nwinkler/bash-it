@@ -1,6 +1,8 @@
 # Bash it
 
-**Bash it** is a mash up of [my](http://github.com/revans) own bash commands and scripts, other bash stuff I have found.
+[![Join the chat at https://gitter.im/revans/bash-it](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/revans/bash-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+**Bash it** is a mash up of my own bash commands and scripts, other bash stuff I have found.
 
 (And a shameless ripoff of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). :)
 
