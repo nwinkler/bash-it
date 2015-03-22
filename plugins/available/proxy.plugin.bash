@@ -65,7 +65,7 @@ show_proxy ()
 	echo ""
 	echo "Environment Variables"
 	echo "====================="
-	env | grep -i "proxy"
+	env | grep -i "proxy" | grep -v "BASH_IT"
 
 	bash_it_show_proxy
 	npm_show_proxy
@@ -288,7 +288,6 @@ svn_enable_proxy ()
 	group 'proxy'
 
 	if $(command -v svn &> /dev/null) ; then
-		svn_disable_proxy
 		python - "$BASH_IT_HTTP_PROXY" "$BASH_IT_NO_PROXY" <<END
 import ConfigParser, os, sys, urlparse
 pieces = urlparse.urlparse(sys.argv[1])
