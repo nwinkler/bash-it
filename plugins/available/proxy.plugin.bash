@@ -241,7 +241,7 @@ if (config.has_section('global')):
 	if (config.has_option('global', 'http-proxy-port')):
 		proxy_port = config.get('global', 'http-proxy-port')
 	if (config.has_option('global', 'http-proxy-exceptions')):
-		proxy_port = config.get('global', 'http-proxy-exceptions')
+		proxy_exceptions = config.get('global', 'http-proxy-exceptions')
 	print 'http-proxy-host      : ' + proxy_host
 	print 'http-proxy-port      : ' + proxy_port
 	print 'http-proxy-exceptions: ' + proxy_exceptions
@@ -255,9 +255,26 @@ svn_disable_proxy ()
 	group 'proxy'
 
 	if $(command -v svn &> /dev/null) ; then
-		#git config --unset-all http.proxy
-		#git config --unset-all https.proxy
-		echo "Disabled SVN proxy settings"
+		python - <<END
+import ConfigParser, os
+config = ConfigParser.ConfigParser()
+config.read(os.path.expanduser('~/.subversion/servers'))
+if config.has_section('global'):
+	changed = False
+	if config.has_option('global', 'http-proxy-host'):
+		config.remove_option('global', 'http-proxy-host')
+		changed = True
+	if config.has_option('global', 'http-proxy-port'):
+		config.remove_option('global', 'http-proxy-port')
+		changed = True
+	if config.has_option('global', 'http-proxy-exceptions'):
+		config.remove_option('global', 'http-proxy-exceptions')
+		changed = True
+	print 'Disabled SVN proxy settings'
+	if changed:
+		with open(os.path.expanduser('~/.subversion/servers'), 'wb') as configfile:
+			config.write(configfile)
+END
 	fi
 }
 
@@ -268,10 +285,23 @@ svn_enable_proxy ()
 
 	if $(command -v svn &> /dev/null) ; then
 		svn_disable_proxy
-
-		#git config --add http.proxy $BASH_IT_HTTP_PROXY
-		#git config --add https.proxy $BASH_IT_HTTPS_PROXY
-		echo "Enabled SVN proxy settings"
+		# TODO Parse proxy into host and port
+		python - "$BASH_IT_HTTP_PROXY" "$BASH_IT_NO_PROXY" <<END
+import ConfigParser, os, sys
+host = sys.argv[1]
+port = sys.argv[2]
+exceptions = sys.argv[2]
+config = ConfigParser.ConfigParser()
+config.read(os.path.expanduser('~/.subversion/servers'))
+if not config.has_section('global'):
+	config.add_section('global')
+config.set('global', 'http-proxy-host', host)
+config.set('global', 'http-proxy-port', port)
+config.set('global', 'http-proxy-exceptions', exceptions)
+print 'Enabled SVN proxy settings'
+with open(os.path.expanduser('~/.subversion/servers'), 'wb') as configfile:
+	config.write(configfile)
+END
 	fi
 }
 
