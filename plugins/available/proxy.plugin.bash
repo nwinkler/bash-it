@@ -219,6 +219,46 @@ git_enable_proxy ()
 	fi
 }
 
+
+svn_show_proxy ()
+{
+	about 'Shows current SVN project proxy settings'
+	group 'proxy'
+
+	if $(command -v svn &> /dev/null) ; then
+		echo "SVN Project Proxy Settings"
+		echo "====================="
+		echo "SVN HTTP  proxy: " `git config --get http.proxy`
+		echo "SVN HTTPS proxy: " `git config --get https.proxy`
+	fi
+}
+
+svn_disable_proxy ()
+{
+	about 'Disables current SVN project proxy settings'
+	group 'proxy'
+
+	if $(command -v svn &> /dev/null) ; then
+		#git config --unset-all http.proxy
+		#git config --unset-all https.proxy
+		echo "Disabled SVN project proxy settings"
+	fi
+}
+
+svn_enable_proxy ()
+{
+	about 'Enables current SVN project proxy settings'
+	group 'proxy'
+
+	if $(command -v svn &> /dev/null) ; then
+		svn_disable_proxy
+
+		#git config --add http.proxy $BASH_IT_HTTP_PROXY
+		#git config --add https.proxy $BASH_IT_HTTPS_PROXY
+		echo "Enabled SVN project proxy settings"
+	fi
+}
+
 ssh_show_proxy ()
 {
 	about 'Shows SSH config proxy settings (from ~/.ssh/config)'
