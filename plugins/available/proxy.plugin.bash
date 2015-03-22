@@ -222,32 +222,48 @@ git_enable_proxy ()
 
 svn_show_proxy ()
 {
-	about 'Shows current SVN project proxy settings'
+	about 'Shows SVN proxy settings'
 	group 'proxy'
 
-	if $(command -v svn &> /dev/null) ; then
-		echo "SVN Project Proxy Settings"
-		echo "====================="
-		echo "SVN HTTP  proxy: " `git config --get http.proxy`
-		echo "SVN HTTPS proxy: " `git config --get https.proxy`
+	if $(command -v svn &> /dev/null) && $(command -v python &> /dev/null) ; then
+		echo "SVN Proxy Settings"
+		echo "=================="
+		python - <<END
+import ConfigParser, os
+config = ConfigParser.ConfigParser()
+config.read(os.path.expanduser('~/.subversion/servers'))
+if (config.has_section('global')):
+	proxy_host = ''
+	proxy_port = ''
+	proxy_exceptions = ''
+	if (config.has_option('global', 'http-proxy-host')):
+		proxy_host = config.get('global', 'http-proxy-host')
+	if (config.has_option('global', 'http-proxy-port')):
+		proxy_port = config.get('global', 'http-proxy-port')
+	if (config.has_option('global', 'http-proxy-exceptions')):
+		proxy_port = config.get('global', 'http-proxy-exceptions')
+	print 'http-proxy-host      : ' + proxy_host
+	print 'http-proxy-port      : ' + proxy_port
+	print 'http-proxy-exceptions: ' + proxy_exceptions
+END
 	fi
 }
 
 svn_disable_proxy ()
 {
-	about 'Disables current SVN project proxy settings'
+	about 'Disables SVN proxy settings'
 	group 'proxy'
 
 	if $(command -v svn &> /dev/null) ; then
 		#git config --unset-all http.proxy
 		#git config --unset-all https.proxy
-		echo "Disabled SVN project proxy settings"
+		echo "Disabled SVN proxy settings"
 	fi
 }
 
 svn_enable_proxy ()
 {
-	about 'Enables current SVN project proxy settings'
+	about 'Enables SVN proxy settings'
 	group 'proxy'
 
 	if $(command -v svn &> /dev/null) ; then
@@ -255,7 +271,7 @@ svn_enable_proxy ()
 
 		#git config --add http.proxy $BASH_IT_HTTP_PROXY
 		#git config --add https.proxy $BASH_IT_HTTPS_PROXY
-		echo "Enabled SVN project proxy settings"
+		echo "Enabled SVN proxy settings"
 	fi
 }
 
