@@ -270,10 +270,10 @@ if config.has_section('global'):
 	if config.has_option('global', 'http-proxy-exceptions'):
 		config.remove_option('global', 'http-proxy-exceptions')
 		changed = True
-	print 'Disabled SVN proxy settings'
 	if changed:
 		with open(os.path.expanduser('~/.subversion/servers'), 'wb') as configfile:
 			config.write(configfile)
+	print 'Disabled SVN proxy settings'
 END
 	fi
 }
@@ -285,22 +285,31 @@ svn_enable_proxy ()
 
 	if $(command -v svn &> /dev/null) ; then
 		svn_disable_proxy
-		# TODO Parse proxy into host and port
 		python - "$BASH_IT_HTTP_PROXY" "$BASH_IT_NO_PROXY" <<END
-import ConfigParser, os, sys
-host = sys.argv[1]
-port = sys.argv[2]
+import ConfigParser, os, sys, urlparse
+pieces = urlparse.urlparse(sys.argv[1])
+host = pieces.hostname
+port = pieces.port
 exceptions = sys.argv[2]
 config = ConfigParser.ConfigParser()
 config.read(os.path.expanduser('~/.subversion/servers'))
 if not config.has_section('global'):
 	config.add_section('global')
-config.set('global', 'http-proxy-host', host)
-config.set('global', 'http-proxy-port', port)
-config.set('global', 'http-proxy-exceptions', exceptions)
-print 'Enabled SVN proxy settings'
+if host is not None:
+	config.set('global', 'http-proxy-host', host)
+else:
+	config.remove_option('global', 'http-proxy-host')
+if port is not None:
+	config.set('global', 'http-proxy-port', port)
+else:
+	config.remove_option('global', 'http-proxy-port')
+if exceptions is not None:
+	config.set('global', 'http-proxy-exceptions', exceptions)
+else:
+	config.remove_option('global', 'http-proxy-exceptions')
 with open(os.path.expanduser('~/.subversion/servers'), 'wb') as configfile:
 	config.write(configfile)
+print 'Enabled SVN proxy settings'
 END
 	fi
 }
