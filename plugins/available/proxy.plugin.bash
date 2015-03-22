@@ -17,6 +17,7 @@ disable_proxy ()
 
 	npm_disable_proxy
 	ssh_disable_proxy
+	svn_disable_proxy
 }
 
 enable_proxy ()
@@ -35,6 +36,7 @@ enable_proxy ()
 
 	npm_enable_proxy
 	ssh_enable_proxy
+	svn_enable_proxy
 }
 
 enable_proxy_alt ()
@@ -68,6 +70,7 @@ show_proxy ()
 	bash_it_show_proxy
 	npm_show_proxy
 	git_global_show_proxy
+	svn_show_proxy
 	ssh_show_proxy
 }
 
@@ -226,6 +229,7 @@ svn_show_proxy ()
 	group 'proxy'
 
 	if $(command -v svn &> /dev/null) && $(command -v python &> /dev/null) ; then
+		echo ""
 		echo "SVN Proxy Settings"
 		echo "=================="
 		python - <<END
