@@ -11,6 +11,8 @@ disable_proxy ()
 	unset HTTP_PROXY
 	unset HTTPS_PROXY
 	unset ALL_PROXY
+	unset no_proxy
+	unset NO_PROXY
 	echo "Disabled proxy environment variables"
 
 	npm_disable_proxy
@@ -27,6 +29,8 @@ enable_proxy ()
 	export HTTP_PROXY=$http_proxy
 	export HTTPS_PROXY=$https_proxy
 	export ALL_PROXY=$http_proxy
+	export no_proxy=$BASH_IT_NO_PROXY
+	export NO_PROXY=$no_proxy
 	echo "Enabled proxy environment variables"
 
 	npm_enable_proxy
@@ -43,6 +47,8 @@ enable_proxy_alt ()
 	export HTTP_PROXY=$http_proxy
 	export HTTPS_PROXY=$https_proxy
 	export ALL_PROXY=$http_proxy
+	export no_proxy=$BASH_IT_NO_PROXY
+	export NO_PROXY=$no_proxy
 	echo "Enabled alternate proxy environment variables"
 
 	npm_enable_proxy $http_proxy $https_proxy
@@ -57,8 +63,7 @@ show_proxy ()
 	echo ""
 	echo "Environment Variables"
 	echo "====================="
-	env | grep "proxy"
-	env | grep "ALL_PROXY"
+	env | grep -i "proxy"
 
 	bash_it_show_proxy
 	npm_show_proxy
@@ -76,6 +81,7 @@ proxy_help ()
 	echo "proxy settings when you call 'enable_proxy'. These variables are best defined in a custom"
 	echo "script in bash-it's custom script folder ($BASH_IT/custom),"
 	echo "e.g. $BASH_IT/custom/proxy.env.bash"
+	echo "You can also define a comma-separated list of proxy exclusions using BASH_IT_NO_PROXY."
 
 	bash_it_show_proxy
 }
