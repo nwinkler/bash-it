@@ -55,6 +55,7 @@ enable_proxy_alt ()
 
 	npm_enable_proxy $http_proxy $https_proxy
 	ssh_enable_proxy
+	svn_enable_proxy $http_proxy
 }
 
 show_proxy ()
@@ -258,7 +259,7 @@ svn_disable_proxy ()
 	about 'Disables SVN proxy settings'
 	group 'proxy'
 
-	if $(command -v svn &> /dev/null) ; then
+	if $(command -v svn &> /dev/null) && $(command -v python &> /dev/null) ; then
 		python - <<END
 import ConfigParser, os
 config = ConfigParser.ConfigParser()
@@ -287,8 +288,10 @@ svn_enable_proxy ()
 	about 'Enables SVN proxy settings'
 	group 'proxy'
 
-	if $(command -v svn &> /dev/null) ; then
-		python - "$BASH_IT_HTTP_PROXY" "$BASH_IT_NO_PROXY" <<END
+	if $(command -v svn &> /dev/null) && $(command -v python &> /dev/null) ; then
+		local my_http_proxy=${1:-$BASH_IT_HTTP_PROXY}
+
+		python - "$my_http_proxy" "$BASH_IT_NO_PROXY" <<END
 import ConfigParser, os, sys, urlparse
 pieces = urlparse.urlparse(sys.argv[1])
 host = pieces.hostname
