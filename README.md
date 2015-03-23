@@ -2,11 +2,11 @@
 
 [![Join the chat at https://gitter.im/Bash-it/bash-it](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Bash-it/bash-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**Bash it** is a mash up of my own bash commands and scripts, other bash stuff I have found.
-
-(And a shameless ripoff of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). :)
+**Bash it** is a collection of community bash commands and scripts. (And a shameless ripoff of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh). :)
 
 Includes autocompletion, themes, aliases, custom functions, a few stolen pieces from Steve Losh, and more.
+
+Bash it provides a solid framework for using, developing and maintaining shell scripts and custom commands for your daily work. If you're using the _Bourne Again Shell_ (Bash) on a regular basis and have been looking for an easy way on how to keep all of these nice little scripts and aliases under control, then Bash it is for you! Stop polluting your `~/bin` directory and your `.bashrc` file, fork/clone Bash it and start hacking away.
 
 ## Install
 
@@ -112,9 +112,9 @@ Unset `BASH_IT_LEGACY_PASS` to have Bash it **return to default behavior**:
 
 ## Help out
 
-I think everyone has their own custom scripts accumulated over time.  And so, following in the footsteps of oh-my-zsh, bash it is a framework for easily customizing your bash shell. Everyone's got a custom toolbox, so let's start making them even better, **as a community!**
+We think everyone has their own custom scripts accumulated over time.  And so, following in the footsteps of oh-my-zsh, Bash it is a framework for easily customizing your bash shell. Everyone's got a custom toolbox, so let's start making them even better, **as a community!**
 
-Send me a pull request and I'll merge it as long as it looks good. If you change an existing command, please give an explanation why. That will help a lot when I merge your changes in.
+Send us a pull request and we'll merge it as long as it looks good. If you change an existing command, please give an explanation why. That will help a lot when we merge your changes in.
 
 Thanks, and happing bashing!
 
