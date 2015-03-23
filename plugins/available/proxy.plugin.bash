@@ -80,12 +80,19 @@ proxy_help ()
 	about 'Provides an overview of the bash-it proxy configuration'
 	group 'proxy'
 
-	echo ""
-	echo "bash-it uses the variables BASH_IT_HTTP_PROXY and BASH_IT_HTTPS_PROXY to set the shell's"
-	echo "proxy settings when you call 'enable_proxy'. These variables are best defined in a custom"
-	echo "script in bash-it's custom script folder ($BASH_IT/custom),"
-	echo "e.g. $BASH_IT/custom/proxy.env.bash"
-	echo "You can also define a comma-separated list of proxy exclusions using BASH_IT_NO_PROXY."
+	cat << EOF
+Bash-it provides support for enabling/disabling proxy settings for various shell tools.
+
+The following backends are currently supported (in addition to the shell's environment variables): Git, SVN, npm, ssh
+
+Bash-it uses the following variables to set the shell's proxy settings when you call 'enable_proxy'.
+These variables are best defined in a custom script in bash-it's custom script folder ('$BASH_IT/custom'),
+e.g. '$BASH_IT/custom/proxy.env.bash'
+* BASH_IT_HTTP_PROXY and BASH_IT_HTTPS_PROXY: Define the proxy URL to be used, e.g. 'http://localhost:1234'
+* BASH_IT_NO_PROXY: A comma-separated list of proxy exclusions, e.g. '127.0.0.1,localhost'
+
+Run 'glossary proxy' to show the available proxy functions with a short description.
+EOF
 
 	bash_it_show_proxy
 }
