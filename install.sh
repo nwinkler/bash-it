@@ -71,22 +71,6 @@ then
 else
   while true
   do
-    read -p "Do you use Jekyll? (If you don't know what Jekyll is, answer 'n') [Y/N] " RESP
-
-    case $RESP in
-      [yY])
-        cp $HOME/.bash_it/template/jekyllconfig.template.bash $HOME/.jekyllconfig
-        echo "Copied the template .jekyllconfig into your home directory. Edit this file to customize bash-it for using the Jekyll plugins"
-        break
-        ;;
-      [nN])
-        break
-        ;;
-      *)
-        echo "Please enter Y or N"
-    esac
-  done
-
   for type in "aliases" "plugins" "completion"
   do
     while true
