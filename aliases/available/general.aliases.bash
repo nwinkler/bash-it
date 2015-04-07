@@ -58,5 +58,4 @@ alias	md='mkdir -p'
 alias	rd='rmdir'
 
 # Alias helper
-alias  ag='alias | grep'
-
+alias  alg='alias | grep'
