@@ -5,6 +5,7 @@ THEME_PROMPT_LEFT_SEPARATOR=""
 
 SHELL_SSH_CHAR=${SHELL_SSH_CHAR:=" "}
 SHELL_THEME_PROMPT_COLOR=32
+SHELL_THEME_PROMPT_COLOR_SUDO=202
 
 VIRTUALENV_CHAR=${POWERLINE_VIRTUALENV_CHAR:="❲p❳ "}
 CONDA_VIRTUALENV_CHAR=${POWERLINE_CONDA_VIRTUALENV_CHAR:="❲c❳ "}
@@ -29,7 +30,6 @@ RVM_THEME_PROMPT_COLOR=161
 RVM_CHAR=${POWERLINE_RVM_CHAR:="❲r❳ "}
 
 CWD_THEME_PROMPT_COLOR=240
-CWD_THEME_PROMPT_COLOR_SUDO=202
 
 LAST_STATUS_THEME_PROMPT_COLOR=196
 
@@ -54,6 +54,11 @@ function set_rgb_color {
 }
 
 function powerline_shell_prompt {
+    SHELL_PROMPT_COLOR=${SHELL_THEME_PROMPT_COLOR}
+    CAN_I_RUN_SUDO=$(sudo -n uptime 2>&1 | grep "load" | wc -l)
+    if [ ${CAN_I_RUN_SUDO} -gt 0 ]; then
+        SHELL_PROMPT_COLOR=${SHELL_THEME_PROMPT_COLOR_SUDO}
+    fi
     SEGMENT_AT_RIGHT=0
     if [[ -n "${SSH_CLIENT}" ]]; then
         SHELL_PROMPT="${SHELL_SSH_CHAR}${USER}@${HOSTNAME}"
@@ -61,8 +66,8 @@ function powerline_shell_prompt {
         SHELL_PROMPT="${USER}"
     fi
     RIGHT_PROMPT_LENGTH=$(( ${RIGHT_PROMPT_LENGTH} + ${#SHELL_PROMPT} + 2 ))
-    SHELL_PROMPT="$(set_rgb_color - ${SHELL_THEME_PROMPT_COLOR}) ${SHELL_PROMPT} ${normal}"
-    LAST_THEME_COLOR=${SHELL_THEME_PROMPT_COLOR}
+    SHELL_PROMPT="$(set_rgb_color - ${SHELL_PROMPT_COLOR}) ${SHELL_PROMPT} ${normal}"
+    LAST_THEME_COLOR=${SHELL_PROMPT_COLOR}
     (( SEGMENT_AT_RIGHT += 1 ))
 }
 
@@ -130,12 +135,7 @@ function powerline_scm_prompt {
 }
 
 function powerline_cwd_prompt {
-    CWD_PROMPT_COLOR=${CWD_THEME_PROMPT_COLOR}
-    CAN_I_RUN_SUDO=$(sudo -n uptime 2>&1 | grep "load" | wc -l)
-    if [ ${CAN_I_RUN_SUDO} -gt 0 ]; then
-        CWD_PROMPT_COLOR=${CWD_THEME_PROMPT_COLOR_SUDO}
-    fi
-    CWD_PROMPT="$(set_rgb_color - ${CWD_THEME_PROMPT_COLOR}) \w ${normal}$(set_rgb_color ${CWD_THEME_PROMPT_COLOR} -)${normal}$(set_rgb_color ${CWD_PROMPT_COLOR} -)${THEME_PROMPT_SEPARATOR}${normal}"
+    CWD_PROMPT="$(set_rgb_color - ${CWD_THEME_PROMPT_COLOR}) \w ${normal}$(set_rgb_color ${CWD_THEME_PROMPT_COLOR} -)${normal}$(set_rgb_color ${CWD_THEME_PROMPT_COLOR} -)${THEME_PROMPT_SEPARATOR}${normal}"
     if [[ "${SEGMENT_AT_LEFT}" -gt 0 ]]; then
         CWD_PROMPT=$(set_rgb_color ${LAST_THEME_COLOR} ${CWD_THEME_PROMPT_COLOR})${THEME_PROMPT_SEPARATOR}${normal}${CWD_PROMPT}
         SEGMENT_AT_LEFT=0
