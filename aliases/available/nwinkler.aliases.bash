@@ -16,3 +16,7 @@ alias k9='kill -9'
 alias pk9='pkill -9'
 
 alias pd='pushd'
+
+
+# https://github.com/nvbn/thefuck
+alias fuck='$(thefuck $(fc -ln -1))'
