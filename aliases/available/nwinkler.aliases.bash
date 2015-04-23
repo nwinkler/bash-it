@@ -19,5 +19,5 @@ alias pd='pushd'
 
 
 # https://github.com/nvbn/thefuck
-alias fuck='$(thefuck $(fc -ln -1))'
+alias fuck='eval $(thefuck $(fc -ln -1))'
 alias please='fuck'
