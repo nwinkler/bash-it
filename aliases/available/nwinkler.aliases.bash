@@ -17,7 +17,3 @@ alias pk9='pkill -9'
 
 alias pd='pushd'
 
-
-# https://github.com/nvbn/thefuck
-alias fuck='eval $(thefuck $(fc -ln -1))'
-alias please='fuck'
