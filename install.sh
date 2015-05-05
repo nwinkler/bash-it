@@ -90,32 +90,29 @@ then
   load_all plugins
   load_all completion
 else
-  while true
+  for type in "aliases" "plugins" "completion"
   do
-    for type in "aliases" "plugins" "completion"
+    while true
     do
-      while true
-      do
-        read -p "Would you like to enable all, some, or no $type? Some of these may make bash slower to start up (especially completion). (all/some/none) " RESP
-        case $RESP
-        in
-        some)
-          load_some $type
-          break
-          ;;
-        all)
-          load_all $type
-          break
-          ;;
-        none)
-          break
-          ;;
-        *)
-          echo "Unknown choice. Please enter some, all, or none"
-          continue
-          ;;
-        esac
-      done
+      read -p "Would you like to enable all, some, or no $type? Some of these may make bash slower to start up (especially completion). (all/some/none) " RESP
+      case $RESP
+      in
+      some)
+        load_some $type
+        break
+        ;;
+      all)
+        load_all $type
+        break
+        ;;
+      none)
+        break
+        ;;
+      *)
+        echo "Unknown choice. Please enter some, all, or none"
+        continue
+        ;;
+      esac
     done
   done
   echo -e "\033[0;32mInstallation finished successfully! Enjoy bash-it!\033[0m"
