@@ -15,7 +15,7 @@ backup-logic () {
 
     cd "$LOGIC_DIR"
 
-    rsync -avrKL --progress -d --delete-excluded "$track" "$LOGIC_BACKUP_DIR/$track"
+    rsync -avrKL --progress -d --delete-excluded "$track/" "$LOGIC_BACKUP_DIR/$track/"
 
     zip -FS -r "$LOGIC_BACKUP_DIR/$track.zip" "$track"
 
