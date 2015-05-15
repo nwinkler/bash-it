@@ -25,3 +25,10 @@ backup-logic () {
     return 1
   fi
 }
+
+show-logic () {
+  about 'shows all local Logic files'
+  group 'logic-pro-x'
+
+  ls -altr "$LOGIC_DIR/" | grep ".logicx"
+}
