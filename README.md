@@ -139,6 +139,7 @@ Once you have defined these variables (and have run `reload` to load the changes
 
 * `enable-proxy`: This sets the shell's proxy environment variables and configures proxy support in your SVN, npm and SSH configuration files.
 * `disable-proxy`: This unsets the shell's proxy environment variables and disables proxy support in your SVN, npm and SSH configuration files.
+* `init-proxy`: Calls `enable-proxy` if proxy support is not currently disabled. Use this in your `.bash_profile` file.
 
 There are many more proxy commands, e.g. for changing the local Git project's proxy settings. Run `glossary proxy` to show the available proxy functions with a short description.
 
