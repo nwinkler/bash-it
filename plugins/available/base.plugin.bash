@@ -237,9 +237,13 @@ count_lines () {
 	param '2: wildcard'
 	group 'base'
 	example 'count_lines . '\''*.js'\'''
-	
+
 	local findDir="$1"
 	local wildcard="$2"
-	
+
 	( find $findDir -name "$wildcard" -print0 | xargs -0 cat ) | wc -l
+}
+
+pless () {
+  pygmentize -f terminal256 -g -P style=monokai $* | less -R
 }
