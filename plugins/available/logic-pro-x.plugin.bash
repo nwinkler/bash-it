@@ -32,3 +32,19 @@ logic-show () {
 
   ls -daltr "$LOGIC_DIR"/*.logicx
 }
+
+_logic-backup-comp()
+{
+	COMPREPLY=()
+	local cur="${COMP_WORDS[COMP_CWORD]}"
+  local IFS=$'\n'
+
+  local logic_files=$(for f in "$LOGIC_DIR"/*.logicx;
+    do
+      basename "${f}"
+    done)
+
+  COMPREPLY=( $(compgen -W "${logic_files[*]}" -- ${cur}) )
+}
+
+complete -o filenames -F _logic-backup-comp logic-backup
