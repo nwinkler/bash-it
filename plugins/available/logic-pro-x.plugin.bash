@@ -4,7 +4,7 @@ about-plugin 'helper functions for Apple Logic Pro X'
 export LOGIC_DIR=~/Music/Logic
 export LOGIC_BACKUP_DIR=~/Dropbox/audio/backup/Logic
 
-backup-logic () {
+logic-backup () {
   about 'backs up a Logic file to Dropbox using rsync'
   group 'logic-pro-x'
 
@@ -26,7 +26,7 @@ backup-logic () {
   fi
 }
 
-show-logic () {
+logic-show () {
   about 'shows all local Logic files'
   group 'logic-pro-x'
 
