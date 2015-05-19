@@ -30,5 +30,5 @@ logic-show () {
   about 'shows all local Logic files'
   group 'logic-pro-x'
 
-  ls -altr "$LOGIC_DIR/" | grep ".logicx"
+  ls -daltr "$LOGIC_DIR"/*.logicx
 }
