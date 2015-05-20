@@ -1,8 +1,13 @@
 cite about-plugin
 about-plugin 'helper functions for Apple Logic Pro X'
 
-export LOGIC_DIR=~/Music/Logic
-export LOGIC_BACKUP_DIR=~/Dropbox/audio/backup/Logic
+if [ -z "$LOGIC_DIR" ]; then
+  export LOGIC_DIR=~/Music/Logic
+fi
+
+if [ -z "$LOGIC_BACKUP_DIR" ]; then
+  export LOGIC_BACKUP_DIR=~/Dropbox/audio/backup/Logic
+fi
 
 logic-backup () {
   about 'backs up a Logic file to Dropbox using rsync'
