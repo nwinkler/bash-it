@@ -17,6 +17,7 @@ disable-proxy ()
 	echo "Disabled proxy environment variables"
 
 	npm-disable-proxy
+	apm-disable-proxy
 	ssh-disable-proxy
 	svn-disable-proxy
 }
@@ -51,6 +52,7 @@ enable-proxy ()
 	echo "Enabled proxy environment variables"
 
 	npm-enable-proxy
+	apm-enable-proxy
 	ssh-enable-proxy
 	svn-enable-proxy
 }
@@ -70,6 +72,7 @@ enable-proxy-alt ()
 	echo "Enabled alternate proxy environment variables"
 
 	npm-enable-proxy $http_proxy $https_proxy
+	apm-enable-proxy $http_proxy $https_proxy
 	ssh-enable-proxy
 	svn-enable-proxy $http_proxy
 }
@@ -86,6 +89,7 @@ show-proxy ()
 
 	bash-it-show-proxy
 	npm-show-proxy
+	apm-show-proxy
 	git-global-show-proxy
 	svn-show-proxy
 	ssh-show-proxy
@@ -99,7 +103,7 @@ proxy-help ()
 	cat << EOF
 Bash-it provides support for enabling/disabling proxy settings for various shell tools.
 
-The following backends are currently supported (in addition to the shell's environment variables): Git, SVN, npm, ssh
+The following backends are currently supported (in addition to the shell's environment variables): Git, SVN, npm, apm (Atom package manager), ssh
 
 Bash-it uses the following variables to set the shell's proxy settings when you call 'enable-proxy'.
 These variables are best defined in a custom script in bash-it's custom script folder ('$BASH_IT/custom'),
@@ -164,6 +168,47 @@ npm-enable-proxy ()
 		npm config set proxy $my_http_proxy
 		npm config set https-proxy $my_https_proxy
 		echo "Enabled npm proxy settings"
+	fi
+}
+
+apm-show-proxy ()
+{
+	about 'Shows the apm proxy settings'
+	group 'proxy'
+
+	if $(command -v apm &> /dev/null) ; then
+		echo ""
+		echo "apm"
+		echo "==="
+		echo "apm HTTP  proxy: " `apm config get proxy`
+		echo "apm HTTPS proxy: " `apm config get https-proxy`
+	fi
+}
+
+apm-disable-proxy ()
+{
+	about 'Disables apm proxy settings'
+	group 'proxy'
+
+	if $(command -v apm &> /dev/null) ; then
+		apm config delete proxy
+		apm config delete https-proxy
+		echo "Disabled apm proxy settings"
+	fi
+}
+
+apm-enable-proxy ()
+{
+	about 'Enables apm proxy settings'
+	group 'proxy'
+
+	local my_http_proxy=${1:-$BASH_IT_HTTP_PROXY}
+	local my_https_proxy=${2:-$BASH_IT_HTTPS_PROXY}
+
+	if $(command -v apm &> /dev/null) ; then
+		apm config set proxy $my_http_proxy
+		apm config set https-proxy $my_https_proxy
+		echo "Enabled apm proxy settings"
 	fi
 }
 

@@ -128,7 +128,7 @@ Bash it's `proxy` plugin allows to enable and disable these variables with a sim
 bash-it enable plugin proxy
 ```
 
-Bash it also provides support for enabling/disabling proxy settings for various shell tools. The following backends are currently supported (in addition to the shell's environment variables): Git, SVN, npm, ssh. The `proxy` plugin changes the configuration files of these tools to enable or disable the proxy settings.
+Bash it also provides support for enabling/disabling proxy settings for various shell tools. The following backends are currently supported (in addition to the shell's environment variables): Git, SVN, npm, apm (Atom Package Manager), ssh. The `proxy` plugin changes the configuration files of these tools to enable or disable the proxy settings.
 
 Bash-it uses the following variables to set the shell's proxy settings when you call `enable-proxy`.
 These variables are best defined in a custom script in Bash-it's custom script folder (`$BASH_IT/custom`), e.g. `$BASH_IT/custom/proxy.env.bash`
@@ -137,8 +137,8 @@ These variables are best defined in a custom script in Bash-it's custom script f
 
 Once you have defined these variables (and have run `reload` to load the changes), you can use the following commands to enable or disable the proxy settings in your current shell:
 
-* `enable-proxy`: This sets the shell's proxy environment variables and configures proxy support in your SVN, npm and SSH configuration files.
-* `disable-proxy`: This unsets the shell's proxy environment variables and disables proxy support in your SVN, npm and SSH configuration files.
+* `enable-proxy`: This sets the shell's proxy environment variables and configures proxy support in your SVN, npm, apm and SSH configuration files.
+* `disable-proxy`: This unsets the shell's proxy environment variables and disables proxy support in your SVN, npm, apm and SSH configuration files.
 * `init-proxy`: Calls `enable-proxy` if proxy support is not currently disabled. Use this in your `.bash_profile` file.
 
 There are many more proxy commands, e.g. for changing the local Git project's proxy settings. Run `glossary proxy` to show the available proxy functions with a short description.
