@@ -38,6 +38,13 @@ logic-show () {
   ls -daltr "$LOGIC_DIR"/*.logicx
 }
 
+logic-show-backup () {
+  about 'shows all backed up Logic files'
+  group 'logic-pro-x'
+
+  ls -altrh "$LOGIC_BACKUP_DIR"/
+}
+
 _logic-backup-comp()
 {
 	COMPREPLY=()
