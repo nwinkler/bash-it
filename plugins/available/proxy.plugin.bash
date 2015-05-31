@@ -167,8 +167,12 @@ npm-enable-proxy ()
 	local my_https_proxy=${2:-$BASH_IT_HTTPS_PROXY}
 
 	if $(command -v npm &> /dev/null) ; then
-		npm config set proxy $my_http_proxy
-		npm config set https-proxy $my_https_proxy
+		if [ -e "$my_http_proxy" ]; then
+			npm config set proxy $my_http_proxy
+		fi
+		if [ -e "$my_http_proxy" ]; then
+			npm config set https-proxy $my_https_proxy
+		fi
 		echo "Enabled npm proxy settings"
 	fi
 }
