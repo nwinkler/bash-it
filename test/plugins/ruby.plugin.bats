@@ -2,6 +2,7 @@
 
 load ../test_helper
 load ../../lib/composure
+load ../plumbing
 load ../../lib/helpers
 load ../../plugins/available/ruby.plugin
 
