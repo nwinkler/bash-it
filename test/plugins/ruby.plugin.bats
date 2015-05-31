@@ -1,8 +1,8 @@
 #!/usr/bin/env bats
 
 load ../test_helper
-load ../../lib/helpers
 load ../../lib/composure
+load ../../lib/helpers
 load ../../plugins/available/ruby.plugin
 
 @test "plugins ruby: remove_gem is defined" {
