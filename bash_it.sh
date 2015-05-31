@@ -20,6 +20,13 @@ then
     export BASH=`bash -c 'echo $BASH'`
 fi
 
+if [ -z "$BASH_IT_CONFIG" ];
+then
+    export BASH_IT_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/bash_it"
+fi
+
+mkdir -p "$BASH_IT_CONFIG"
+
 # For backwards compatibility, look in old BASH_THEME location
 if [ -z "$BASH_IT_THEME" ];
 then

@@ -13,7 +13,7 @@ disable-proxy ()
 	unset ALL_PROXY
 	unset no_proxy
 	unset NO_PROXY
-	export BASH_IT_PROXY_DISABLED=true
+	touch "$BASH_IT_CONFIG/proxy-disabled"
 	echo "Disabled proxy environment variables"
 
 	npm-disable-proxy
@@ -27,7 +27,7 @@ init-proxy ()
 	about 'Initializes the proxy settings for Bash, npm and SSH. If the proxy settings are currently disabled, nothing happens. Use this function in your Bash profile to safely initialize the proxy.'
 	group 'proxy'
 
-	if [ -n "$BASH_IT_PROXY_DISABLED" ] && [ "$BASH_IT_PROXY_DISABLED" = true ]; then
+	if [ -e "$BASH_IT_CONFIG/proxy-disabled" ]; then
 		# Not enabling proxy settings - no-op
 		:
 	else
@@ -48,7 +48,9 @@ enable-proxy ()
 	export ALL_PROXY=$http_proxy
 	export no_proxy=$BASH_IT_NO_PROXY
 	export NO_PROXY=$no_proxy
-	unset BASH_IT_PROXY_DISABLED
+	if [ -e "$BASH_IT_CONFIG/proxy-disabled" ]; then
+		rm "$BASH_IT_CONFIG/proxy-disabled"
+	fi
 	echo "Enabled proxy environment variables"
 
 	npm-enable-proxy
