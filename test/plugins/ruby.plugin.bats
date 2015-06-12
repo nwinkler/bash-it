@@ -1,6 +1,7 @@
 #!/usr/bin/env bats
 
 load ../test_helper
+load ../../lib/helpers
 load ../../lib/composure
 load ../plumbing
 load ../../lib/helpers
