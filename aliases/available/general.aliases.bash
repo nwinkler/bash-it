@@ -59,3 +59,14 @@ alias	rd='rmdir'
 
 # Alias helper
 alias  alg='alias | grep'
+
+# Display whatever file is regular file or folder
+catt() {
+  for i in "$@"; do
+    if [ -d "$i" ]; then
+      ls "$i"
+    else
+      cat "$i"
+    fi
+  done
+}
