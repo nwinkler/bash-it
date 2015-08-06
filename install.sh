@@ -53,6 +53,19 @@ function load_one() {
   fi
 }
 
+function load_all() {
+  for src in $BASH_IT/${file_type}/available/*; do
+      filename="$(basename ${src})"
+      [ ${filename:0:1} = "_" ] && continue
+      dest="${BASH_IT}/${file_type}/enabled/${filename}"
+      if [ ! -e "${dest}" ]; then
+          ln -s "../available/${filename}" "${dest}"
+      else
+          echo "File ${dest} exists, skipping"
+      fi
+  done
+}
+
 function load_some() {
   file_type=$1
   [ -d "$BASH_IT/$file_type/enabled" ] || mkdir "$BASH_IT/$file_type/enabled"
