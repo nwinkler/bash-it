@@ -82,11 +82,8 @@ if [[ "$1" == "--interactive" ]]
 then
   for type in "aliases" "plugins" "completion"
   do
-    while true
-    do
-      echo -e "\033[0;32mEnabling $type\033[0m"
-      load_some $type
-    done
+    echo -e "\033[0;32mEnabling $type\033[0m"
+    load_some $type
   done
 elif [[ "$1" == "--all" ]]
 then
@@ -96,7 +93,7 @@ then
   load_all completion
 else
   echo ""
-  echo "\033[0;32mEnabling sane defaults\033[0m"
+  echo -e "\033[0;32mEnabling sane defaults\033[0m"
   load_one completion bash-it.completion.bash
 fi
 
