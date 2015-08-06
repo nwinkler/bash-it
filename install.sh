@@ -53,21 +53,6 @@ function load_one() {
   fi
 }
 
-function load_all() {
-  file_type=$1
-  [ ! -d "$BASH_IT/$file_type/enabled" ] && mkdir "$BASH_IT/${file_type}/enabled"
-  for src in $BASH_IT/${file_type}/available/*; do
-      filename="$(basename ${src})"
-      [ ${filename:0:1} = "_" ] && continue
-      dest="${BASH_IT}/${file_type}/enabled/${filename}"
-      if [ ! -e "${dest}" ]; then
-          ln -s "../available/${filename}" "${dest}"
-      else
-          echo "File ${dest} exists, skipping"
-      fi
-  done
-}
-
 function load_some() {
   file_type=$1
   [ -d "$BASH_IT/$file_type/enabled" ] || mkdir "$BASH_IT/$file_type/enabled"
@@ -100,12 +85,6 @@ then
     echo -e "\033[0;32mEnabling $type\033[0m"
     load_some $type
   done
-elif [[ "$1" == "--all" ]]
-then
-  echo -e "\033[0;32mEnabling all aliases, plugins and completions.\033[0m"
-  load_all aliases
-  load_all plugins
-  load_all completion
 else
   echo ""
   echo -e "\033[0;32mEnabling sane defaults\033[0m"
