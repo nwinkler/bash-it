@@ -54,6 +54,8 @@ function load_one() {
 }
 
 function load_all() {
+  file_type=$1
+  [ ! -d "$BASH_IT/$file_type/enabled" ] && mkdir "$BASH_IT/${file_type}/enabled"
   for src in $BASH_IT/${file_type}/available/*; do
       filename="$(basename ${src})"
       [ ${filename:0:1} = "_" ] && continue
