@@ -50,6 +50,19 @@ function time-machine-list-old-backups() {
   done
 }
 
+# Taken from here: http://stackoverflow.com/a/30547074/1228454
+function _startsudo() {
+    sudo -v
+    ( while true; do sudo -v; sleep 50; done; ) &
+    SUDO_PID="$!"
+    trap _stopsudo SIGINT SIGTERM
+}
+function _stopsudo() {
+    kill "$SUDO_PID"
+    trap - SIGINT SIGTERM
+    sudo -k
+}
+
 function time-machine-delete-old-backups() {
   group "osx-timemachine"
   about "Deletes all of the backups for the specified machine, with the exception of the most recent one"
@@ -59,10 +72,14 @@ function time-machine-delete-old-backups() {
   # TODO Use the local hostname if none provided
   local COMPUTERNAME=$1
 
-  # TODO Ask for sudo credentials only once
+  Ask for sudo credentials only once
+  _startsudo
+
   echo "$(time-machine-list-old-backups "$COMPUTERNAME")" | while read i ; do
     echo "Deleting: $i"
     # TODO Delete the backups
     #sudo tmutil delete "$i"
   done
+
+  _stopsudo
 }
