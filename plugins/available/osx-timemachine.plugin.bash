@@ -72,7 +72,7 @@ function time-machine-delete-old-backups() {
   # Use the local hostname if none provided
   local COMPUTERNAME=${1:-$(scutil --get ComputerName)}
 
-  Ask for sudo credentials only once
+  # Ask for sudo credentials only once
   _tm_startsudo
 
   echo "$(time-machine-list-old-backups "$COMPUTERNAME")" | while read i ; do
