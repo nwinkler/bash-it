@@ -76,7 +76,6 @@ function time-machine-delete-old-backups() {
   _tm_startsudo
 
   echo "$(time-machine-list-old-backups "$COMPUTERNAME")" | while read i ; do
-    echo "Deleting: $i"
     # Delete the backup
     sudo tmutil delete "$i"
   done
