@@ -63,7 +63,6 @@ function dock-switch() {
     fi
 }
 
-
 function pman ()
 {
     about 'view man documentation in Preview'
@@ -151,3 +150,6 @@ function set_java_home() {
 	fi
   fi
 }
+
+# Make this backwards compatible
+alias pcurl='prevcurl'
