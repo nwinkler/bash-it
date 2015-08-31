@@ -107,7 +107,7 @@ function spotlight() {
   if [ -z "$1" ] ; then
     echo "Usage: $0 [on | off]"
   elif [ $1 = "on" ] ; then
-  	sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
+    sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
   elif [ $1 = "off" ] ; then
     sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.metadata.mds.plist
   fi
