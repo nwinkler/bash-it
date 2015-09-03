@@ -150,6 +150,3 @@ function set_java_home() {
 	fi
   fi
 }
-
-# Make this backwards compatible
-alias pcurl='prevcurl'
