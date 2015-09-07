@@ -89,7 +89,7 @@ It is possible for themes to ignore the `SCM_CHECK` flag and query specific vers
 
 ### Git prompt
 
-Bash it has some nice features related to git, continue reading to know more about.
+Bash it has some nice features related to Git, continue reading to know more about these features.
 
 #### Repository info in the prompt
 
