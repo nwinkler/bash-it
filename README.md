@@ -46,9 +46,9 @@ Anything in the custom directory will be ignored, with the exception of `custom/
 
 ## Themes
 
-There are a few bash it themes. If you've created your own custom prompts, I'd love it if you shared with everyone else! Just submit a Pull Request to me (revans).
+There are a few bash it themes. If you've created your own custom prompts, I'd love it if you shared with everyone else! Just submit a Pull Request.
 
-You can see the theme screenshots [here](https://github.com/revans/bash-it/wiki/Themes)
+You can see the theme screenshots [here](https://github.com/Bash-it/bash-it/wiki/Themes)
 
 Alternatively, you can preview the themes in your own shell using `BASH_PREVIEW=true reload`
 
@@ -198,5 +198,5 @@ Thanks, and happing bashing!
 
 * [List of contributors][contribute]
 
-[contribute]: https://github.com/revans/bash-it/contributors
+[contribute]: https://github.com/Bash-it/bash-it/contributors
 [pass password manager]: http://www.passwordstore.org/
