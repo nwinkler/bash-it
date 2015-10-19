@@ -6,7 +6,7 @@ if [[ `uname -s` == "Darwin" ]]; then
   function code () {
     about 'Starts Visual Studio Code in the provided directory'
     group 'visual-studio-code'
-    
+
     VSCODE_CWD="$PWD" open -n -b "com.microsoft.VSCode" --args $* ;
   }
 fi
