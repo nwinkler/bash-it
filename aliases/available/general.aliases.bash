@@ -54,8 +54,8 @@ then
 fi
 
 # Directory
-alias	md='mkdir -p'
-alias	rd='rmdir'
+alias md='mkdir -p'
+alias rd='rmdir'
 
 # Alias helper
 alias  alg='alias | grep'
