@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-BASH_IT="$HOME/.bash_it"
+BASH_IT="$(cd "$(dirname "$0")" && pwd)"
 
 case $OSTYPE in
   darwin*)
@@ -13,43 +13,63 @@ esac
 BACKUP_FILE=$CONFIG_FILE.bak
 
 if [ -e "$HOME/$BACKUP_FILE" ]; then
-    echo -e "\033[0;33mBackup file already exists. Make sure to backup your .bashrc before running this installation.\033[0m" >&2
-    while true
-    do
-        read -e -n 1 -r -p "Would you like to overwrite the existing backup? This will delete your existing backup file ($HOME/$BACKUP_FILE) [y/N] " RESP
-        case $RESP in
-        [yY])
-            break
-            ;;
-        [nN]|"")
-            echo -e "\033[91mInstallation aborted. Please come back soon!\033[m"
-            exit 1
-            ;;
-        *)
-            echo -e "\033[91mPlease choose y or n.\033[m"
-            ;;
-        esac
-    done
+  echo -e "\033[0;33mBackup file already exists. Make sure to backup your .bashrc before running this installation.\033[0m" >&2
+  while true
+  do
+    read -e -n 1 -r -p "Would you like to overwrite the existing backup? This will delete your existing backup file ($HOME/$BACKUP_FILE) [y/N] " RESP
+    case $RESP in
+    [yY])
+      break
+      ;;
+    [nN]|"")
+      echo -e "\033[91mInstallation aborted. Please come back soon!\033[m"
+      exit 1
+      ;;
+    *)
+      echo -e "\033[91mPlease choose y or n.\033[m"
+      ;;
+    esac
+  done
 fi
 
-test -w "$HOME/$CONFIG_FILE" &&
-  cp -a "$HOME/$CONFIG_FILE" "$HOME/$CONFIG_FILE.bak" &&
-  echo -e "\033[0;32mYour original $CONFIG_FILE has been backed up to $CONFIG_FILE.bak\033[0m"
+while true
+do
+  read -e -n 1 -r -p "Would you like to keep your $CONFIG_FILE and append bash-it templates at the end? [y/N] " choice
+  case $choice in
+  [yY])
+    test -w "$HOME/$CONFIG_FILE" &&
+    cp -aL "$HOME/$CONFIG_FILE" "$HOME/$CONFIG_FILE.bak" &&
+    echo -e "\033[0;32mYour original $CONFIG_FILE has been backed up to $CONFIG_FILE.bak\033[0m"
 
-cp "$HOME/.bash_it/template/bash_profile.template.bash" "$HOME/$CONFIG_FILE"
+    (sed "s|{{BASH_IT}}|$BASH_IT|" "$BASH_IT/template/bash_profile.template.bash" | tail -n +2) >> "$HOME/$CONFIG_FILE"
+    echo -e "\033[0;32mBash-it template has been added to your $CONFIG_FILE\033[0m"
+    break
+    ;;
+  [nN]|"")
+    test -w "$HOME/$CONFIG_FILE" &&
+    cp -aL "$HOME/$CONFIG_FILE" "$HOME/$CONFIG_FILE.bak" &&
+    echo -e "\033[0;32mYour original $CONFIG_FILE has been backed up to $CONFIG_FILE.bak\033[0m"
+    sed "s|{{BASH_IT}}|$BASH_IT|" "$BASH_IT/template/bash_profile.template.bash" > "$HOME/$CONFIG_FILE"
+    break
+    ;;
+  *)
+    echo -e "\033[91mPlease choose y or n.\033[m"
+    ;;
+  esac
+done
 
 echo -e "\033[0;32mCopied the template $CONFIG_FILE into ~/$CONFIG_FILE, edit this file to customize bash-it\033[0m"
 
 function load_one() {
   file_type=$1
   file_to_enable=$2
-  [ ! -d "$BASH_IT/$file_type/enabled" ] && mkdir "$BASH_IT/${file_type}/enabled"
+  mkdir -p "$BASH_IT/${file_type}/enabled"
 
   dest="${BASH_IT}/${file_type}/enabled/${file_to_enable}"
   if [ ! -e "${dest}" ]; then
-      ln -s "../available/${file_to_enable}" "${dest}"
+    ln -sf "../available/${file_to_enable}" "${dest}"
   else
-      echo "File ${dest} exists, skipping"
+    echo "File ${dest} exists, skipping"
   fi
 }
 
@@ -89,7 +109,10 @@ else
   echo ""
   echo -e "\033[0;32mEnabling sane defaults\033[0m"
   load_one completion bash-it.completion.bash
-  load_one plugins alias-completion.bash
+  load_one completion system.completion.bash
+  load_one plugins base.plugin.bash
+  load_one plugins alias-completion.plugin.bash
+  load_one aliases general.aliases.bash
 fi
 
 echo ""

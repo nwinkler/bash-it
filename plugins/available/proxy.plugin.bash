@@ -170,7 +170,7 @@ npm-enable-proxy ()
 		if [ -e "$my_http_proxy" ]; then
 			npm config set proxy $my_http_proxy
 		fi
-		if [ -e "$my_http_proxy" ]; then
+		if [ -e "$my_https_proxy" ]; then
 			npm config set https-proxy $my_https_proxy
 		fi
 		echo "Enabled npm proxy settings"

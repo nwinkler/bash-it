@@ -197,7 +197,7 @@ function buf ()
     cp -a "${filename}" "${filename}_${filetime}"
 }
 
-for_all_dirs ()
+function for_all_dirs ()
 {
 	about 'loops through all subdirectories of the current directory and executes the specified command in each of them'
 	param 'command'
@@ -212,7 +212,7 @@ for_all_dirs ()
 	done
 }
 
-count_lines () {
+function count_lines () {
 	about 'counts line number across files and directories'
 	param '1: directory'
 	param '2: wildcard'
@@ -225,6 +225,14 @@ count_lines () {
 	( find $findDir -name "$wildcard" -print0 | xargs -0 cat ) | wc -l
 }
 
-pless () {
+function pless () {
   pygmentize -f terminal256 -g -P style=monokai $* | less -R
+}
+
+function del() {
+    about 'move files to hidden folder in tmp, that gets cleared on each reboot'
+    param 'file or folder to be deleted'
+    example 'del ./file.txt'
+    group 'base'
+    mkdir -p /tmp/.trash && mv "$@" /tmp/.trash;
 }
