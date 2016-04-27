@@ -453,3 +453,72 @@ ssh-enable-proxy ()
 		echo "Enabled SSH config proxy settings"
 	fi
 }
+
+mvn-show-proxy () {
+	about 'Shows Maven proxy settings'
+	group 'proxy'
+
+	if [ -f ~/.m2/settings.xml ] ; then
+		echo "Maven Proxy Settings"
+		echo "===================="
+		xsltproc - ~/.m2/settings.xml << EOF
+		<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+		  <xsl:output method="xml" omit-xml-declaration="yes" indent="yes"/>
+		  <xsl:strip-space elements="*"/>
+		  <xsl:template match="settings">
+		    <xsl:apply-templates select="proxies"/>
+		  </xsl:template>
+
+		  <xsl:template match="proxies">
+		    <xsl:copy-of select="*" />
+		  </xsl:template>
+		</xsl:stylesheet>
+EOF
+	fi
+}
+
+mvn-disable-proxy () {
+	about 'Disables Maven proxy settings'
+	group 'proxy'
+
+	if [ -f ~/.m2/settings.xml ] ; then
+		xsltproc -o ~/.m2/settings.xml - ~/.m2/settings.xml << EOF
+			<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+				<xsl:template match="node() | @*">
+					<xsl:copy>
+						<xsl:apply-templates select="node() | @*" />
+					</xsl:copy>
+				</xsl:template>
+
+				<xsl:template match="proxy/active">
+					<active>false</active>
+				</xsl:template>
+			</xsl:stylesheet>
+EOF
+
+		echo "Disabled Maven proxy settings"
+	fi
+}
+
+mvn-enable-proxy () {
+	about 'Enables Maven proxy settings'
+	group 'proxy'
+
+	if [ -f ~/.m2/settings.xml ] ; then
+		xsltproc -o ~/.m2/settings.xml - ~/.m2/settings.xml << EOF
+			<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+				<xsl:template match="node() | @*">
+					<xsl:copy>
+						<xsl:apply-templates select="node() | @*" />
+					</xsl:copy>
+				</xsl:template>
+
+				<xsl:template match="proxy/active">
+					<active>true</active>
+				</xsl:template>
+			</xsl:stylesheet>
+EOF
+
+		echo "Enabled Maven proxy settings"
+	fi
+}
