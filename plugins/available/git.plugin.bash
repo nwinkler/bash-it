@@ -127,106 +127,106 @@ function local-ignore() {
 
 # get a quick overview for your git repo
 function git_info() {
-    about 'overview for your git repo'
-    group 'git'
+  about 'overview for your git repo'
+  group 'git'
 
-    if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
-        # print informations
-        echo "git repo overview"
-        echo "-----------------"
-        echo
+  if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+    # print informations
+    echo "git repo overview"
+    echo "-----------------"
+    echo
 
-        # print all remotes and thier details
-        for remote in $(git remote show); do
-            echo $remote:
-            git remote show $remote
-            echo
-        done
+    # print all remotes and thier details
+    for remote in $(git remote show); do
+      echo $remote:
+      git remote show $remote
+      echo
+    done
 
-        # print status of working repo
-        echo "status:"
-        if [ -n "$(git status -s 2> /dev/null)" ]; then
-            git status -s
-        else
-            echo "working directory is clean"
-        fi
-
-        # print at least 5 last log entries
-        echo
-        echo "log:"
-        git log -5 --oneline
-        echo
-
+    # print status of working repo
+    echo "status:"
+    if [ -n "$(git status -s 2> /dev/null)" ]; then
+      git status -s
     else
-        echo "you're currently not in a git repository"
-
+      echo "working directory is clean"
     fi
+
+    # print at least 5 last log entries
+    echo
+    echo "log:"
+    git log -5 --oneline
+    echo
+
+  else
+    echo "you're currently not in a git repository"
+
+  fi
 }
 
 function git_stats {
-    about 'display stats per author'
-    group 'git'
+  about 'display stats per author'
+  group 'git'
 
-# awesome work from https://github.com/esc/git-stats
-# including some modifications
+  # awesome work from https://github.com/esc/git-stats
+  # including some modifications
 
-if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
+  if [ -n "$(git symbolic-ref HEAD 2> /dev/null)" ]; then
     echo "Number of commits per author:"
     git --no-pager shortlog -sn --all
     AUTHORS=$( git shortlog -sn --all | cut -f2 | cut -f1 -d' ')
     LOGOPTS=""
     if [ "$1" == '-w' ]; then
-        LOGOPTS="$LOGOPTS -w"
-        shift
+      LOGOPTS="$LOGOPTS -w"
+      shift
     fi
     if [ "$1" == '-M' ]; then
-        LOGOPTS="$LOGOPTS -M"
-        shift
+      LOGOPTS="$LOGOPTS -M"
+      shift
     fi
     if [ "$1" == '-C' ]; then
-        LOGOPTS="$LOGOPTS -C --find-copies-harder"
-        shift
+      LOGOPTS="$LOGOPTS -C --find-copies-harder"
+      shift
     fi
     for a in $AUTHORS
     do
-        echo '-------------------'
-        echo "Statistics for: $a"
-        echo -n "Number of files changed: "
-        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f3 | sort -iu | wc -l
-        echo -n "Number of lines added: "
-        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f1 | awk '{s+=$1} END {print s}'
-        echo -n "Number of lines deleted: "
-        git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f2 | awk '{s+=$1} END {print s}'
-        echo -n "Number of merges: "
-        git log $LOGOPTS --all --merges --author=$a | grep -c '^commit'
+      echo '-------------------'
+      echo "Statistics for: $a"
+      echo -n "Number of files changed: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f3 | sort -iu | wc -l
+      echo -n "Number of lines added: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f1 | awk '{s+=$1} END {print s}'
+      echo -n "Number of lines deleted: "
+      git log $LOGOPTS --all --numstat --format="%n" --author=$a | cut -f2 | awk '{s+=$1} END {print s}'
+      echo -n "Number of merges: "
+      git log $LOGOPTS --all --merges --author=$a | grep -c '^commit'
     done
-else
+  else
     echo "you're currently not in a git repository"
-fi
+  fi
 }
 
 # Example: "github_clone swaroopch/dotbash"
 function github_clone {
-    git clone git://github.com/$*.git
+  git clone git://github.com/$*.git
 }
 
 function github_clone_ssh {
-    about 'Clones a GitHub repo using SSH'
-    group 'git'
-    param '1: repo user and name'
-    param '2: local directory to clone into'
-    example '$ github_clone_ssh nwinkler/bash-it ~/.bash_it'
+  about 'Clones a GitHub repo using SSH'
+  group 'git'
+  param '1: repo user and name'
+  param '2: local directory to clone into'
+  example '$ github_clone_ssh nwinkler/bash-it ~/.bash_it'
 
-    git clone git@github.com:$1.git $2
+  git clone git@github.com:$1.git $2
 }
 
 function github_add_upstream {
-    about 'Adds an upstream repository (HTTPS)'
-    group 'git'
-    param '1: repo user and name'
-    example '$ github_add_upstream revans/bash-it'
+  about 'Adds an upstream repository (HTTPS)'
+  group 'git'
+  param '1: repo user and name'
+  example '$ github_add_upstream revans/bash-it'
 
-    git remote add upstream https://github.com/$1.git
+  git remote add upstream https://github.com/$1.git
 }
 
 function gittowork() {
