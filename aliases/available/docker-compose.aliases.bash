@@ -2,5 +2,5 @@ cite 'about-alias'
 about-alias 'docker-compose abbreviations'
 
 alias dco="docker-compose"
-alias dcofresh="docker-compose stop ; docker-compose rm -f --all ; docker-compose up -d ; docker-compose logs -f"
+alias dcofresh="docker-compose-fresh"
 alias dcol="docker-compose logs -f --tail 100"
