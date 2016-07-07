@@ -19,6 +19,9 @@ function docker-enter() {
   param '1: Name of the container to enter'
   example 'docker-enter oracle-xe'
 
+  # Some versions of Docker don't like the ALL_PROXY variable
+  # An error like "proxy: unknown scheme: http" might be seen
+  unset ALL_PROXY
   docker exec -it "$@" /bin/bash;
 }
 
