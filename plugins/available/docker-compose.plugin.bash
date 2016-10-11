@@ -13,8 +13,7 @@ function docker-compose-fresh() {
     DCO_FILE_PARAM="--file $1"
   fi
 
-  docker-compose $DCO_FILE_PARAM stop
-  docker-compose $DCO_FILE_PARAM rm -f --all
+  docker-compose $DCO_FILE_PARAM down
   docker-compose $DCO_FILE_PARAM up -d
   docker-compose $DCO_FILE_PARAM logs -f --tail 100
 }
