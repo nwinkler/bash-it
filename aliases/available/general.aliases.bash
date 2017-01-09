@@ -12,6 +12,10 @@ alias lll='ls -als'
 
 alias _="sudo"
 
+# colored grep
+alias grep='grep --color=auto'
+export GREP_COLOR='1;33'
+
 if [ $(uname) = "Linux" ]
 then
   alias ls="ls --color=auto"
