@@ -36,6 +36,7 @@ alias gpub='git_pub'
 alias gr='git remote'
 alias grv='git remote -v'
 alias gra='git remote add'
+alias gd='git diff'
 alias gdv='git diff -w "$@" | vim -R -'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
@@ -84,19 +85,3 @@ case $OSTYPE in
     alias gtls='git tag -l | sort -V'
     ;;
 esac
-
-if [ -z "$EDITOR" ]; then
-    case $OSTYPE in
-      linux*)
-        alias gd='git diff | vim -R -'
-        ;;
-      darwin*)
-        alias gd='git diff | mate'
-        ;;
-      *)
-        alias gd='git diff'
-        ;;
-    esac
-else
-    alias gd="git diff | $EDITOR"
-fi

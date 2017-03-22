@@ -75,6 +75,13 @@ alias rd='rmdir'
 # Alias helper
 alias  alg='alias | grep'
 
+# Common misspellings of bash-it
+alias shit='bash-it'
+alias batshit='bash-it'
+alias bashit='bash-it'
+alias bash_it='bash-it'
+alias bash_ti='bash-it'
+
 # Display whatever file is regular file or folder
 catt() {
   for i in "$@"; do
