@@ -4,20 +4,20 @@ about-plugin 'Helpers to more easily work with Docker'
 function docker-remove-most-recent-container() {
   about 'attempt to remove the most recent container from docker ps -a'
   group 'docker'
-  docker ps -ql | xargs docker rm
+  docker ps -ql | xargs -r docker rm
 }
 
 function docker-remove-most-recent-image() {
   about 'attempt to remove the most recent image from docker images'
   group 'docker'
-  docker images -q | head -1 | xargs docker rmi
+  docker images -q | head -1 | xargs -r docker rmi
 }
 
 function docker-remove-stale-assets() {
   about 'attempt to remove exited containers and dangling images'
   group 'docker'
-  docker ps --filter status=exited -q | xargs docker rm --volumes
-  docker images --filter dangling=true -q | xargs docker rmi
+  docker ps --filter status=exited -q | xargs -r docker rm --volumes
+  docker images --filter dangling=true -q | xargs -r docker rmi
 }
 
 function docker-enter() {
@@ -41,7 +41,7 @@ function docker-remove-images() {
     DOCKER_IMAGES=""
     for IMAGE_ID in $@; do DOCKER_IMAGES="$DOCKER_IMAGES\|$IMAGE_ID"; done
     # Find the image IDs for the supplied tags
-    ID_ARRAY=($(docker images | grep "${DOCKER_IMAGES:2}" | awk {'print $3'}))
+    ID_ARRAY=($(docker images | grep "${DOCKER_IMAGES:2}" | awk {'print $1":"$2'}))
     # Strip out duplicate IDs before attempting to remove the image(s)
     docker rmi $(echo ${ID_ARRAY[@]} | tr ' ' '\n' | sort -u | tr '\n' ' ')
  fi
