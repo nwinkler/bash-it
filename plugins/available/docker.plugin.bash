@@ -4,20 +4,20 @@ about-plugin 'Helpers to more easily work with Docker'
 function docker-remove-most-recent-container() {
   about 'attempt to remove the most recent container from docker ps -a'
   group 'docker'
-  docker ps -ql | xargs -r docker rm
+  docker ps -ql | xargs docker rm
 }
 
 function docker-remove-most-recent-image() {
   about 'attempt to remove the most recent image from docker images'
   group 'docker'
-  docker images -q | head -1 | xargs -r docker rmi
+  docker images -q | head -1 | xargs docker rmi
 }
 
 function docker-remove-stale-assets() {
   about 'attempt to remove exited containers and dangling images'
   group 'docker'
-  docker ps --filter status=exited -q | xargs -r docker rm --volumes
-  docker images --filter dangling=true -q | xargs -r docker rmi
+  docker ps --filter status=exited -q | xargs docker rm --volumes
+  docker images --filter dangling=true -q | xargs docker rmi
 }
 
 function docker-enter() {
