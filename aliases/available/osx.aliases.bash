@@ -53,6 +53,9 @@ alias ql='qlmanage -p 2>/dev/null'
 alias mute="osascript -e 'set volume output muted true'"
 alias unmute="osascript -e 'set volume output muted false'"
 
+# Open `nettop` monitoring TCP connections, in collapsed mode
+alias nt="nettop -m tcp -P"
+
 # Pin to the tail of long commands for an audible alert after long processes
 ## curl http://downloads.com/hugefile.zip; lmk
 alias lmk="say 'Process complete.'"
