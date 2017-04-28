@@ -207,7 +207,7 @@ function for_all_dirs ()
 	do
 		echo "Processing $dir"
 		cd "$dir"
-		$*
+		eval $*
 		cd ..
 	done
 }
