@@ -23,7 +23,7 @@ function git_pub() {
   BRANCH=$(git rev-parse --abbrev-ref HEAD)
 
   echo "Publishing ${BRANCH} to remote origin"
-  git push -u origin $BRANCH
+  git push -u origin $BRANCH --follow-tags
 }
 
 function git_revert() {
