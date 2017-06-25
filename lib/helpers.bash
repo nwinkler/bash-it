@@ -175,7 +175,7 @@ _bash-it-migrate() {
       # Only process the ones that don't use the new structure
       if ! [[ $ff =~ ^[0-9]*$BASH_IT_LOAD_PRIORITY_SEPARATOR.*\.bash$ ]] ; then
         # Get the type of component from the extension
-        typeset single_type=$(echo $ff | awk -F'.' '{print $2}' | sed 's/aliases/alias/g')
+        typeset single_type=$(echo $ff | sed -e 's/.*\.\(.*\)\.bash/\1/g' | sed 's/aliases/alias/g')
         typeset component_name=$(echo $ff | cut -d'.' -f1)
 
         echo "Migrating $single_type $component_name."
@@ -216,7 +216,7 @@ _bash-it-describe ()
         else
             enabled=' '
         fi
-        printf "%-20s%-10s%s\n" "$(basename $f | cut -d'.' -f1)" "  [$enabled]" "$(cat $f | metafor about-$file_type)"
+        printf "%-20s%-10s%s\n" "$(basename $f | sed -e 's/\(.*\)\..*\.bash/\1/g')" "  [$enabled]" "$(cat $f | metafor about-$file_type)"
     done
     printf '\n%s\n' "to enable $preposition $file_type, do:"
     printf '%s\n' "$ bash-it enable $file_type  <$file_type name> [$file_type name]... -or- $ bash-it enable $file_type all"

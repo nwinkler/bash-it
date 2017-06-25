@@ -9,10 +9,42 @@ cite _about _param _example _group _author _version
 load ../../lib/helpers
 
 function local_setup {
-  mkdir -p $BASH_IT/plugins
+  mkdir -p $BASH_IT
   lib_directory="$(cd "$(dirname "$0")" && pwd)"
-  cp -r $lib_directory/../../plugins/available $BASH_IT/plugins
+  cp -r $lib_directory/../.. $BASH_IT
+  mkdir -p $BASH_IT/aliases/enabled
+  mkdir -p $BASH_IT/completion/enabled
   mkdir -p $BASH_IT/plugins/enabled
+}
+
+@test "bash-it: enable the ansible aliases through the bash-it function" {
+  run bash-it enable alias "ansible"
+  assert_line "0" 'ansible enabled with priority 150.'
+  assert [ -L "$BASH_IT/aliases/enabled/150---ansible.aliases.bash" ]
+}
+
+@test "bash-it: enable the todo.txt-cli aliases through the bash-it function" {
+  run bash-it enable alias "todo.txt-cli"
+  assert_line "0" 'todo.txt-cli enabled with priority 150.'
+  assert [ -L "$BASH_IT/aliases/enabled/150---todo.txt-cli.aliases.bash" ]
+}
+
+@test "bash-it: enable the curl aliases" {
+  run _enable-alias "curl"
+  assert_line "0" 'curl enabled with priority 150.'
+  assert [ -L "$BASH_IT/aliases/enabled/150---curl.aliases.bash" ]
+}
+
+@test "bash-it: enable the apm completion through the bash-it function" {
+  run bash-it enable completion "apm"
+  assert_line "0" 'apm enabled with priority 350.'
+  assert [ -L "$BASH_IT/completion/enabled/350---apm.completion.bash" ]
+}
+
+@test "bash-it: enable the brew completion" {
+  run _enable-completion "brew"
+  assert_line "0" 'brew enabled with priority 350.'
+  assert [ -L "$BASH_IT/completion/enabled/350---brew.completion.bash" ]
 }
 
 @test "bash-it: enable the node plugin" {
@@ -25,6 +57,21 @@ function local_setup {
   run bash-it enable plugin "node"
   assert_line "0" 'node enabled with priority 250.'
   assert [ -L "$BASH_IT/plugins/enabled/250---node.plugin.bash" ]
+}
+
+@test "bash-it: enable the node and nvm plugins through the bash-it function" {
+  run bash-it enable plugin "node" "nvm"
+  assert_line "0" 'node enabled with priority 250.'
+  assert_line "1" 'nvm enabled with priority 225.'
+  assert [ -L "$BASH_IT/plugins/enabled/250---node.plugin.bash" ]
+  assert [ -L "$BASH_IT/plugins/enabled/225---nvm.plugin.bash" ]
+}
+
+@test "bash-it: enable the foo-unkown and nvm plugins through the bash-it function" {
+  run bash-it enable plugin "foo-unknown" "nvm"
+  assert_line "0" 'sorry, foo-unknown does not appear to be an available plugin.'
+  assert_line "1" 'nvm enabled with priority 225.'
+  assert [ -L "$BASH_IT/plugins/enabled/225---nvm.plugin.bash" ]
 }
 
 @test "bash-it: enable the nvm plugin" {
@@ -99,6 +146,9 @@ function local_setup {
   ln -s $BASH_IT/plugins/available/node.plugin.bash $BASH_IT/plugins/enabled/node.plugin.bash
   assert [ -L "$BASH_IT/plugins/enabled/node.plugin.bash" ]
 
+  ln -s $BASH_IT/aliases/available/todo.txt-cli.aliases.bash $BASH_IT/aliases/enabled/todo.txt-cli.aliases.bash
+  assert [ -L "$BASH_IT/aliases/enabled/todo.txt-cli.aliases.bash" ]
+
   run _enable-plugin "ssh"
   assert [ -L "$BASH_IT/plugins/enabled/250---ssh.plugin.bash" ]
 
@@ -106,8 +156,10 @@ function local_setup {
   assert [ -L "$BASH_IT/plugins/enabled/225---nvm.plugin.bash" ]
   assert [ -L "$BASH_IT/plugins/enabled/250---node.plugin.bash" ]
   assert [ -L "$BASH_IT/plugins/enabled/250---ssh.plugin.bash" ]
+  assert [ -L "$BASH_IT/aliases/enabled/150---todo.txt-cli.aliases.bash" ]
   assert [ ! -L "$BASH_IT/plugins/enabled/node.plugin.bash" ]
   assert [ ! -L "$BASH_IT/plugins/enabled/nvm.plugin.bash" ]
+  assert [ ! -L "$BASH_IT/aliases/enabled/todo.txt-cli.aliases.bash" ]
 }
 
 @test "bash-it: run the migrate command without anything to migrate and nothing enabled" {
@@ -180,4 +232,9 @@ function local_setup {
   assert [ -L "$BASH_IT/plugins/enabled/225---nvm.plugin.bash" ]
 
   _bash-it-plugins | grep "nvm" | grep "\[x\]"
+}
+
+@test "bash-it: describe the todo.txt-cli aliases without enabling them" {
+  run _bash-it-aliases
+  assert_line "todo.txt-cli          [ ]     todo.txt-cli abbreviations"
 }
