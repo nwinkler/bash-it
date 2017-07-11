@@ -13,3 +13,4 @@ plugins/custom.plugins.bash
 .c9/
 bats
 .idea
+enabled/*
