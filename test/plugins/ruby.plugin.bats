@@ -17,6 +17,6 @@ load ../../plugins/available/ruby.plugin
     skip 'ruby not installed'
   fi
 
-  last_path_entry=$(echo $PATH | tr ":" "\n" | tail -1);
+  local last_path_entry=$(echo $PATH | tr ":" "\n" | tail -1)
   [[ "${last_path_entry}" == "${HOME}"/.gem/ruby/*/bin ]]
 }
