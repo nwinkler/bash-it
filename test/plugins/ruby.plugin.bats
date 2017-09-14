@@ -43,6 +43,8 @@ function local_teardown {
     skip 'ruby not installed'
   fi
 
+  load ../../plugins/available/ruby.plugin
+
   local last_path_entry=$(echo $PATH | tr ":" "\n" | tail -1)
   [[ "${last_path_entry}" == "${HOME}"/.gem/ruby/*/bin ]]
 }
