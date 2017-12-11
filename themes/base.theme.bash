@@ -39,6 +39,8 @@ SCM_GIT_BEHIND_CHAR="↓"
 SCM_GIT_UNTRACKED_CHAR="?:"
 SCM_GIT_UNSTAGED_CHAR="U:"
 SCM_GIT_STAGED_CHAR="S:"
+SCM_GIT_STASH_CHAR_PREFIX="{"
+SCM_GIT_STASH_CHAR_SUFFIX="}"
 
 SCM_HG='hg'
 SCM_HG_CHAR='☿'
@@ -200,7 +202,7 @@ function git_prompt_vars {
   SCM_STATE=${GIT_THEME_PROMPT_CLEAN:-$SCM_THEME_PROMPT_CLEAN}
   if [[ "$(git config --get bash-it.hide-status)" != "1" ]]; then
     [[ "${SCM_GIT_IGNORE_UNTRACKED}" = "true" ]] && local git_status_flags='-uno'
-    local status_lines=$((git status --porcelain ${git_status_flags} -b 2> /dev/null ||
+    local status_lines=$($(git status --porcelain ${git_status_flags} -b 2> /dev/null ||
                           git status --porcelain ${git_status_flags}    2> /dev/null) | git_status_summary)
     local status=$(awk 'NR==1' <<< "$status_lines")
     local counts=$(awk 'NR==2' <<< "$status_lines")
@@ -271,7 +273,7 @@ function git_prompt_vars {
   [[ "${status}" =~ ${behind_re} ]] && SCM_BRANCH+=" ${SCM_GIT_BEHIND_CHAR}${BASH_REMATCH[1]}"
 
   local stash_count="$(git stash list 2> /dev/null | wc -l | tr -d ' ')"
-  [[ "${stash_count}" -gt 0 ]] && SCM_BRANCH+=" {${stash_count}}"
+  [[ "${stash_count}" -gt 0 ]] && SCM_BRANCH+=" ${SCM_GIT_STASH_CHAR_PREFIX}${stash_count}${SCM_GIT_STASH_CHAR_SUFFIX}"
 
   SCM_BRANCH+=${details}
 
@@ -374,7 +376,7 @@ function chruby_version_prompt {
 
     ruby_version=$(ruby --version | awk '{print $1, $2;}') || return
 
-    if [[ ! $(chruby | grep '*') ]]; then
+    if [[ ! $(chruby | grep '\*') ]]; then
       ruby_version="${ruby_version} (system)"
     fi
     echo -e "${CHRUBY_THEME_PROMPT_PREFIX}${ruby_version}${CHRUBY_THEME_PROMPT_SUFFIX}"
