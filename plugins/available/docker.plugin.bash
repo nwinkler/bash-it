@@ -47,6 +47,24 @@ function docker-remove-images() {
  fi
 }
 
+function docker-remove-images-fuzzy() {
+  about 'attempt to remove images with fuzzy selection, requires fzf: https://github.com/junegunn/fzf'
+  group 'docker'
+  example 'docker-remove-images-fuzzy latest'
+  param '1: query parameter for fzf (optional)'
+
+  # Filter out the first (header) line of `docker images`.
+  # Run fzf in multi-select mode (TAB)
+  # Identify selected items through "repo:tag"
+  ID_ARRAY=($(docker images | sed '1d' | fzf --query="$1" -m | awk {'print $1":"$2'}))
+
+  # Don't do anything if nothing was selected.
+  if [ ${#ID_ARRAY[@]} -gt 0 ]; then
+    # Strip out duplicate IDs before attempting to remove the image(s)
+    docker rmi $(echo ${ID_ARRAY[@]} | tr ' ' '\n' | sort -u | tr '\n' ' ')
+  fi
+}
+
 function docker-image-dependencies() {
   about 'attempt to create a Graphiz image of the supplied image ID dependencies'
   group 'docker'
