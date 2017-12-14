@@ -42,9 +42,29 @@ vf() {
 
 # fbr - checkout git branch (including remote branches)
 fbr() {
+  about "Use fzf to switch between Git branches"
+  group "fzf"
+  param "1: Search term for fzf"
+  example "fbr feature"
+
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux --query="$1" --preview="" -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+fvag() {
+  about "Use fzf to browse matches from ag while searching in file. The selected result is opened in vim."
+  group "fzf"
+  param "Any params you want to provide to ag"
+  example "fvag -G '.*.xml' foo"
+
+  local ffile
+
+  ffile="$(ag --nobreak --noheading $@ | fzf -0 -1 --preview='' | awk -F: '{print $1 " +" $2}')"
+
+  if [[ -n $ffile ]]; then
+    vim $ffile
+  fi
 }
