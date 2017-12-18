@@ -13,4 +13,6 @@ plugins/custom.plugins.bash
 .c9/
 bats
 .idea
+*.sublime-workspace
+*.sublime-project
 enabled/*
