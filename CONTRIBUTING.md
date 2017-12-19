@@ -3,6 +3,24 @@
 When contributing a new feature, a bug fix, a new theme, or any other change to Bash-it, please consider the following guidelines.
 Most of this is common sense, but please try to stick to the conventions listed here.
 
+<details>
+  <summary>Table of Contents</summary>
+
+<!-- toc -->
+
+- [Issues](#issues)
+- [Pull Requests](#pull-requests)
+- [Code Style](#code-style)
+- [Unit Tests](#unit-tests)
+- [Features](#features)
+- [Themes](#themes)
+- [Documentation](#documentation)
+  * [Table of Contents](#table-of-contents)
+
+<!-- tocstop -->
+
+</details>
+
 ## Issues
 
 * When opening a new issue in the issue tracker, please include information about which _Operating System_ you're using, and which version of _Bash_.
@@ -85,3 +103,27 @@ When verifying test results, please try to use the `assert` functions found in t
   Please do not add theme screenshots to the repo itself, as they will add unnecessary bloat to the repo.
   The project's Wiki has a _Themes_ page where you can add a screenshot if you want.
 * Ideally, each theme's folder should contain a `README.md` file describing the theme and its configuration options.
+
+## Documentation
+
+### Table of Contents
+
+The _table of contents_ in this project's readme files is generated through [markdown-toc](https://github.com/jonschlinkert/markdown-toc). To install this tool locally, please run the following once (you'll need a local installation of `npm` and Node.js):
+
+```bash
+npm install --global markdown-toc
+```
+
+To generate/update the table of contents in the main readme file, please run the following command:
+
+```bash
+markdown-toc -i README.md
+```
+
+This needs to be done whenever any of the headings in this file change. You can use the same approach for the other readme files in this project.
+
+To update the table of contents in all readme files, use the following code:
+
+```bash
+for f in *.md ; do markdown-toc -i "$f" ; done
+```

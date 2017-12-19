@@ -2,6 +2,19 @@
 
 This page summarizes a couple of rules to keep in mind when developing features or making changes in Bash-it.
 
+<details>
+  <summary>Table of Contents</summary>
+
+<!-- toc -->
+
+- [Load Order](#load-order)
+  * [General Load Order](#general-load-order)
+  * [Individual Component Load Order](#individual-component-load-order)
+
+<!-- tocstop -->
+
+</details>
+
 ## Load Order
 
 ### General Load Order
