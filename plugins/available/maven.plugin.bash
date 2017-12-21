@@ -1,6 +1,23 @@
 cite about-plugin
 about-plugin 'maven helper functions'
 
+maven-fuzzy-delete () {
+  about 'Deletes directories from the local Maven repository using fuzzy search, requires fzf: https://github.com/junegunn/fzf'
+  group 'maven'
+  param '1: query parameter for fzf (optional)'
+  example 'maven-fuzzy-delete log4j'
+
+  # Only find directories
+  # Run fzf in multi-select mode (TAB)
+  # Use fzf preview defaults, e.g. with a preview window
+  DIR_ARRAY=($(find "$HOME/.m2/repository" -type d | fzf --query="$1" -m))
+
+  # Don't do anything if nothing was selected.
+  if [ ${#DIR_ARRAY[@]} -gt 0 ]; then
+    echo ${DIR_ARRAY[@]} | xargs rm -vrf
+  fi
+}
+
 usemvn () {
   about 'Switches between available Maven versions for the current shell. Lists the available Maven versions if called without a parameter. The root directory for Maven installations can be defined using the variable MAVEN_INSTALL_ROOT. If this is not defined, /usr/local is assumed. The Maven directories under this directory are expected to be named apache-maven-*'
   group 'maven'
