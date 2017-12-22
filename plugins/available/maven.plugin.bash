@@ -18,6 +18,24 @@ maven-fuzzy-delete () {
   fi
 }
 
+maven-fuzzy-find () {
+  about 'Finds POM files in the local Maven repository using fuzzy search, requires fzf: https://github.com/junegunn/fzf'
+  group 'maven'
+  param '1: query parameter for fzf (optional)'
+  example 'maven-fuzzy-find log4j'
+
+  local SELECTED
+
+  # Only find .pom files
+  # Use fzf preview defaults, e.g. with a preview window
+  SELECTED=$(find "$HOME/.m2/repository" -type f -name '*.pom' | fzf --query="$1")
+
+  # Don't do anything if nothing was selected.
+  if [ -n "${SELECTED}" ]; then
+    echo ${SELECTED}
+  fi
+}
+
 usemvn () {
   about 'Switches between available Maven versions for the current shell. Lists the available Maven versions if called without a parameter. The root directory for Maven installations can be defined using the variable MAVEN_INSTALL_ROOT. If this is not defined, /usr/local is assumed. The Maven directories under this directory are expected to be named apache-maven-*'
   group 'maven'
