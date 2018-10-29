@@ -26,3 +26,4 @@ alias dkrmif='docker-remove-images-fuzzy'  # Delete images with fuzzy selection,
 alias dkideps='docker-image-dependencies'  # Output a graph of image dependencies using Graphiz
 alias dkre='docker-runtime-environment'  # List environmental variables of the supplied image ID
 alias dkelc='docker exec -it `dklcid` bash' # Enter last container (works with Docker 1.3 and above)
+alias dkex='docker exec -it ' # Useful to run any commands into container without leaving host
