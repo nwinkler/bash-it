@@ -76,8 +76,8 @@ Refer to the official [Bash documentation](https://www.gnu.org/software/bash/man
 
 ### Install using Docker
 
-You can try Bash-it in an isolated environment without changing any local files via a [Docker](https://www.docker.com/) Container.  
-(Bash Shell v4.4 with Bash-it, [bats](https://github.com/sstephenson/bats) and bash-completion based on [Alpine Linux](https://alpinelinux.org/)).   
+You can try Bash-it in an isolated environment without changing any local files via a [Docker](https://www.docker.com/) Container.
+(Bash Shell v4.4 with Bash-it, [bats](https://github.com/sstephenson/bats) and bash-completion based on [Alpine Linux](https://alpinelinux.org/)).
 
 `docker pull ellerbrock/bash-it`
 
@@ -189,6 +189,7 @@ There are over 50+ Bash-it themes to pick from in `$BASH_IT/themes`.
 The default theme is `bobby`.
 Set `BASH_IT_THEME` to the theme name you want, or if you've developed your own custom theme outside of `$BASH_IT/themes`,
 point the `BASH_IT_THEME` variable directly to the theme file.
+To disable theming completely, leave the variable empty.
 
 Examples:
 
@@ -198,6 +199,9 @@ export BASH_IT_THEME="powerline-multiline"
 
 # Use a theme outside of the Bash-it folder
 export BASH_IT_THEME="/home/foo/my_theme/my_theme.theme.bash"
+
+# Disable theming
+export BASH_IT_THEME=""
 ```
 
 You can easily preview the themes in your own shell using `BASH_PREVIEW=true bash-it reload`.
@@ -346,7 +350,7 @@ You can control the prefix and the suffix of this component using the two variab
 
 And
 
-* `export SCM_THEME_CURRENT_USER_SUFFIX=' ☺︎ '` 
+* `export SCM_THEME_CURRENT_USER_SUFFIX=' ☺︎ '`
 
 **NOTE:** If using `SCM_GIT_SHOW_MINIMAL_INFO=true`, then the value of `SCM_GIT_SHOW_CURRENT_USER` is ignored.
 
