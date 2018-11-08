@@ -13,7 +13,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
     if [ -n "$1" ]; then
       security add-generic-password -a ansible_vault_$(basename "$PWD" | sed -e 's/ /-/g') -s ansible -w $1
     else
-        reference ansible-add-macOS-keychain
+        reference ansible-add-vault-password-to-macOS-keychain
     fi
   }
 
