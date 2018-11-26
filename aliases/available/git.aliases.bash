@@ -81,6 +81,7 @@ alias gcsam="git commit -S -am"
 alias gstd="git stash drop"
 alias gstl="git stash list"
 alias gh='cd "$(git rev-parse --show-toplevel)"'
+alias ggc="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
 
 case $OSTYPE in
   darwin*)
