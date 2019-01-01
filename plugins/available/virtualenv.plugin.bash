@@ -3,12 +3,15 @@
 cite about-plugin
 about-plugin 'virtualenvwrapper and pyenv-virtualenvwrapper helper functions'
 
+if [ -d "$HOME/.local/bin" ]; then
+  pathmunge "$HOME/.local/bin"
+fi
+
 if _command_exists pyenv; then
   pyenv virtualenvwrapper
 else
   [[ `which virtualenvwrapper.sh` ]] && . virtualenvwrapper.sh
 fi
-
 
 function mkvenv {
   about 'create a new virtualenv for this directory'
@@ -17,7 +20,6 @@ function mkvenv {
   cwd=`basename \`pwd\``
   mkvirtualenv --distribute $cwd
 }
-
 
 function mkvbranch {
   about 'create a new virtualenv for the current branch'
