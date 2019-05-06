@@ -84,6 +84,7 @@ alias gst="git stash"
 alias gstb="git stash branch"
 alias gstd="git stash drop"
 alias gstl="git stash list"
+alias gstp="git stash pop"
 alias gh='cd "$(git rev-parse --show-toplevel)"'
 alias ggc="git reflog expire --expire=now --all && git gc --prune=now --aggressive"
 # Show untracked files
