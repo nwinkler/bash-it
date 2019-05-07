@@ -7,5 +7,5 @@ function jar_manifest {
   param '1: JAR file to extract the MANIFEST from'
   example 'jar_manifest lib/foo.jar'
 
-  unzip -c $1 META-INF/MANIFEST.MF
+  unzip -c "$1" META-INF/MANIFEST.MF
 }
