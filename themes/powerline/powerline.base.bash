@@ -30,10 +30,11 @@ function __powerline_user_info_prompt {
       fi
       ;;
     *)
+      local user=${SHORT_USER:-${USER}}
       if [[ -n "${SSH_CLIENT}" ]] || [[ -n "${SSH_CONNECTION}" ]]; then
-        user_info="${USER_INFO_SSH_CHAR}${USER}"
+        user_info="${USER_INFO_SSH_CHAR}${user}"
       else
-        user_info="${USER}"
+        user_info="${user}"
       fi
       ;;
   esac
@@ -119,7 +120,7 @@ function __powerline_cwd_prompt {
 }
 
 function __powerline_hostname_prompt {
-    echo "$(hostname -s)|${HOST_THEME_PROMPT_COLOR}"
+    echo "${SHORT_HOSTNAME:-$(hostname -s)}|${HOST_THEME_PROMPT_COLOR}"
 }
 
 function __powerline_wd_prompt {
@@ -158,6 +159,14 @@ function __powerline_in_vim_prompt {
 function __powerline_aws_profile_prompt {
   if [[ -n "${AWS_PROFILE}" ]]; then
     echo "${AWS_PROFILE_CHAR}${AWS_PROFILE}|${AWS_PROFILE_PROMPT_COLOR}"
+  fi
+}
+
+function __powerline_shlvl_prompt {
+  if [[ "${SHLVL}" -gt 1 ]]; then
+    local prompt="${SHLVL_THEME_PROMPT_CHAR}"
+    local level=$(( ${SHLVL} - 1))
+    echo "${prompt}${level}|${SHLVL_THEME_PROMPT_COLOR}"
   fi
 }
 
