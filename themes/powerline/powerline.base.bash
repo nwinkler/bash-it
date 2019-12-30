@@ -170,15 +170,39 @@ function __powerline_shlvl_prompt {
   fi
 }
 
+function __powerline_dirstack_prompt {
+  if [[ "${#DIRSTACK[@]}" -gt 1 ]]; then
+    local depth=$(( ${#DIRSTACK[@]} - 1 ))
+    local prompt="${DIRSTACK_THEME_PROMPT_CHAR}"
+    if [[ "${depth}" -ge 2 ]]; then
+      prompt+="${depth}"
+    fi
+    echo "${prompt}|${DIRSTACK_THEME_PROMPT_COLOR}"
+  fi
+}
+
+function __powerline_history_number_prompt {
+  echo "${HISTORY_NUMBER_THEME_PROMPT_CHAR}\!|${HISTORY_NUMBER_THEME_PROMPT_COLOR}"
+}
+
+function __powerline_command_number_prompt {
+  echo "${COMMAND_NUMBER_THEME_PROMPT_CHAR}\#|${COMMAND_NUMBER_THEME_PROMPT_COLOR}"
+}
+
 function __powerline_left_segment {
   local OLD_IFS="${IFS}"; IFS="|"
   local params=( $1 )
   IFS="${OLD_IFS}"
   local separator_char="${POWERLINE_LEFT_SEPARATOR}"
+  local separator_char_soft="${POWERLINE_LEFT_SEPARATOR_SOFT}"
   local separator=""
 
   if [[ "${SEGMENTS_AT_LEFT}" -gt 0 ]]; then
-    separator="$(set_color ${LAST_SEGMENT_COLOR} ${params[1]})${separator_char}${normal}"
+    if [[ "${LAST_SEGMENT_COLOR}" -eq "${params[1]}" ]]; then
+      separator="$(set_color - ${LAST_SEGMENT_COLOR})${separator_char_soft}${normal}"
+    else
+      separator="$(set_color ${LAST_SEGMENT_COLOR} ${params[1]})${separator_char}${normal}"
+    fi
   fi
   LEFT_PROMPT+="${separator}$(set_color - ${params[1]}) ${params[0]} ${normal}"
   LAST_SEGMENT_COLOR=${params[1]}

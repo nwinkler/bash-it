@@ -12,6 +12,9 @@ A colorful theme, where shows a lot information about your shell session.
 * Current username and hostname
 * Current time
 * Current shell level
+* Current dirstack level (`pushd` / `popd`)
+* Current history number
+* Current command number
 * An indicator when connected by SSH
 * An indicator when `sudo` has the credentials cached (see the `sudo` manpage for more info about this)
 * An indicator when the current shell is inside the Vim editor
@@ -42,6 +45,10 @@ You can change the format using the following variable:
 
 The time/date is printed by the `date` command, so refer to its man page to change the format.
 
+### Soft Separators
+
+Adjacent segments having the same background color will use a less-pronouced (i.e. soft) separator between them.
+
 ### Segment Order
 
 The contents of the prompt can be "reordered", all the "segments" (every piece of information) can take any place. The currently available segments are:
@@ -63,6 +70,9 @@ The contents of the prompt can be "reordered", all the "segments" (every piece o
 * `wd` - Working directory, like `cwd` but doesn't show the full folder
   hierarchy, only the directory you're currently in.
 * `shlvl` - Show the current shell level (based on `SHLVL` environment variable), but only if you are not in root shell
+* `dirstack` - Show the current dirstack level (based on `DIRSTACK` environment variable), but only if the stack is not empty
+* `history_number` - Show current history number
+* `command_number` - Show current command number
 
 A variable can be defined to set the order of the prompt segments:
 
