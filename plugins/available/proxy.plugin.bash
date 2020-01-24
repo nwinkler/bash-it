@@ -17,7 +17,6 @@ disable-proxy ()
 	echo "Disabled proxy environment variables"
 
 	npm-disable-proxy
-	apm-disable-proxy
 	ssh-disable-proxy
 	svn-disable-proxy
 }
@@ -54,7 +53,6 @@ enable-proxy ()
 	echo "Enabled proxy environment variables"
 
 	npm-enable-proxy
-	apm-enable-proxy
 	ssh-enable-proxy
 	svn-enable-proxy
 }
