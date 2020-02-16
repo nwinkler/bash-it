@@ -38,16 +38,6 @@ fcd() {
   cd "$dir"
 }
 
-vf() {
-  about "Use fasd to search the file to open in vim"
-  group "fzf"
-  param "1: Search term for fasd"
-  example "vf xml"
-
-  local file
-  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
-}
-
 # fbr - checkout git branch (including remote branches)
 fbr() {
   about "Use fzf to switch between Git branches"
