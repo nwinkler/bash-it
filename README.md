@@ -1,6 +1,7 @@
 # Bash-it
 
-[![Build Status](https://travis-ci.org/nwinkler/bash-it.svg?branch=master)](https://travis-ci.org/nwinkler/bash-it) [![Join the chat at https://gitter.im/Bash-it/bash-it](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Bash-it/bash-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.com/Bash-it/bash-it.svg?branch=master)](https://travis-ci.com/Bash-it/bash-it)
+[![Join the chat at https://gitter.im/Bash-it/bash-it](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Bash-it/bash-it?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 **Bash-it** is a collection of community Bash commands and scripts for Bash 3.2+.
 (And a shameless ripoff of [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh) :smiley:)
@@ -11,23 +12,37 @@ Bash-it provides a solid framework for using, developing and maintaining shell s
 If you're using the _Bourne Again Shell_ (Bash) regularly and have been looking for an easy way on how to keep all of these nice little scripts and aliases under control, then Bash-it is for you!
 Stop polluting your `~/bin` directory and your `.bashrc` file, fork/clone Bash-it and start hacking away.
 
-- [Contributing](#contributing)
-- [Installation](#installation)
-  - [Install Options](#install-options)
-  - [via Docker](#install-using-docker)
-  - [Updating](#updating)
-- [Help](#help-screens)
-- [Search](#search)
-  - [Syntax](#syntax)
-  - [Searching with Negations](#searching-with-negations)
-  - [Using Search to Enable or Disable Components](#using-search-to-enable-or-disable-components)
-  - [Disabling ASCII Color](#disabling-ascii-color)
-- [Custom scripts, aliases, themes, and functions](#custom-scripts-aliases-themes-and-functions)
-- [Themes](#themes)
-- [Uninstalling](#uninstalling)
-- [Misc](#misc)
-- [Help Out](#help-out)
-- [Contributors](#contributors)
+- [Bash-it](#bash-it)
+  - [Contributing](#contributing)
+  - [Installation](#installation)
+    - [Install Options](#install-options)
+    - [Install using Docker](#install-using-docker)
+    - [Updating](#updating)
+  - [Help Screens](#help-screens)
+  - [Search](#search)
+    - [Syntax](#syntax)
+    - [Searching with Negations](#searching-with-negations)
+    - [Using Search to Enable or Disable Components](#using-search-to-enable-or-disable-components)
+    - [Disabling ASCII Color](#disabling-ascii-color)
+  - [Custom scripts, aliases, themes, and functions](#custom-scripts-aliases-themes-and-functions)
+  - [Themes](#themes)
+  - [Uninstalling](#uninstalling)
+  - [Misc](#misc)
+    - [Bash Profile Aliases](#bash-profile-aliases)
+    - [Prompt Version Control Check](#prompt-version-control-check)
+    - [Git prompt](#git-prompt)
+    - [Repository info in the prompt](#repository-info-in-the-prompt)
+    - [Remotes and remote branches](#remotes-and-remote-branches)
+    - [Untracked files](#untracked-files)
+    - [Stash item count](#stash-item-count)
+    - [Ahead/Behind Count](#aheadbehind-count)
+    - [Git user](#git-user)
+    - [Git show minimal status info](#git-show-minimal-status-info)
+    - [Ignore repo status](#ignore-repo-status)
+    - [Pass function renamed to passgen](#pass-function-renamed-to-passgen)
+    - [Proxy Support](#proxy-support)
+  - [Help out](#help-out)
+  - [Contributors](#contributors)
 
 ## Contributing
 
