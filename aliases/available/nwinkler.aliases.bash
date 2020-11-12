@@ -16,4 +16,3 @@ alias k9='kill -9'
 alias pk9='pkill -9'
 
 alias pd='pushd'
-
