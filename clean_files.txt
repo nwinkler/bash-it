@@ -23,6 +23,9 @@ docs
 .gitattributes
 lint_clean_files.sh
 
+# plugins
+plugins/osx-timemachine.plugin.bash
+
 # themes
 #
 themes/90210
