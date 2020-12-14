@@ -69,6 +69,7 @@ alias gri='git rebase -i'
 alias gcom='git checkout master'
 alias gcb='git checkout -b'
 alias gcob='git checkout -b'
+alias gcobu='git checkout -b ${USER}/'
 alias gct='git checkout --track'
 alias gcpd='git checkout master; git pull; git branch -D'
 alias gexport='git archive --format zip --output'
@@ -122,16 +123,20 @@ alias ggc="git reflog expire --expire=now --all && git gc --prune=now --aggressi
 # Git home
 alias ghm='cd "$(git rev-parse --show-toplevel)"'
 if ! _command_exists gh; then
-  alias gh='ghm'
+	alias gh='ghm'
 fi
 # Show untracked files
 alias gu='git ls-files . --exclude-standard --others'
 
+# Git SVN
+alias gsr='git svn rebase'
+alias gsd='git svn dcommit'
+
 case $OSTYPE in
-  darwin*)
-    alias gtls="git tag -l | gsort -V"
-    ;;
-  *)
-    alias gtls='git tag -l | sort -V'
-    ;;
+	darwin*)
+		alias gtls="git tag -l | gsort -V"
+		;;
+	*)
+		alias gtls='git tag -l | sort -V'
+		;;
 esac

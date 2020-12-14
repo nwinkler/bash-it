@@ -30,3 +30,10 @@ plugins/osx-timemachine.plugin.bash
 #
 themes/90210
 themes/powerline
+
+# completions
+#
+completion/available/cargo.completion.bash
+completion/available/knife.completion.bash
+completion/available/pipx.completion.bash
+completion/available/rustup.completion.bash
