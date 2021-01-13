@@ -17,6 +17,7 @@
 # root directories
 #
 docs
+hooks
 
 # root files
 #
@@ -28,8 +29,14 @@ plugins/osx-timemachine.plugin.bash
 
 # themes
 #
+themes/agnoster
 themes/90210
 themes/powerline
+themes/barbuk
+
+# plugins
+#
+plugins/available/basher.plugin.bash
 
 # completions
 #
@@ -39,6 +46,8 @@ completion/available/packer.completion.bash
 completion/available/pipx.completion.bash
 completion/available/rustup.completion.bash
 completion/available/vault.completion.bash
+completion/available/sdkman.completion.bash
 
 # aliases
+aliases/available/dnf.aliases.bash
 aliases/available/vim.aliases.bash
