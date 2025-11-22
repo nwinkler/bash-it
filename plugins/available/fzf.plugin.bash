@@ -6,6 +6,8 @@ about-plugin 'load fzf, if you are using it'
 
 _command_exists fzf || return
 
+eval "$(fzf --bash)"
+
 if [ -r ~/.fzf.bash ] ; then
   source ~/.fzf.bash
 elif [ -r "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] ; then
